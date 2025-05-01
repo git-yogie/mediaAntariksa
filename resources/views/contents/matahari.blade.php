@@ -48,7 +48,82 @@
                             </div>
                         </div>
                     </div>
+                    <div class="card card-body shadow-sm">
+                        <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 
+                            <strong>Cermati bentuk 3d Matahari berikut</strong> kamu bisa berinteraksi dengan klik kanan
+                            pada mouse untuk putar, klik kiri untuk menggeser, dan scroll untuk zoom
+                        </div>
+
+                        <x-sun id="sun1" width="600px" height="600px" color="#FFD700" bloom-strength="3"
+                            particles="800" particle-color="#ff6600" />
+
+
+                    </div>
+                </section>
+                <section id="page-2">
+                    @php
+
+                        $questions = [
+                            [
+                                'text' =>
+                                    'Saat malam hari di Bumi, bagian Bumi yang mengalami malam tidak mendapatkan cahaya Matahari. Mengapa bagian itu tidak mendapatkan cahaya, padahal Matahari tetap bersinar?',
+                                'type' => 'single',
+                                'options' => [
+                                    ['text' => 'A. Karena Matahari sedang bersembunyi'],
+                                    ['text' => 'B. Karena bulan menutupi cahaya Matahari'],
+                                    ['text' => 'C. Karena Bumi berputar sehingga bagian itu membelakangi Matahari'],
+                                    ['text' => 'D. Karena Matahari berpindah ke sisi lain'],
+                                ],
+                                'correctAnswers' => [2],
+                            ],
+                            [
+                                'text' =>
+                                    'Bayangkan kamu sedang berdiri di pantai dan melihat air laut pasang naik. Apa hubungan peristiwa ini dengan posisi Bulan terhadap Bumi?',
+                                'type' => 'single',
+                                'options' => [
+                                    ['text' => 'A. Bulan membuat angin laut bertiup kencang'],
+                                    ['text' => 'B. Gravitasi Bulan menarik air laut sehingga menyebabkan pasang'],
+                                    ['text' => 'C. Cahaya Bulan menghangatkan air laut'],
+                                    ['text' => 'D. Bulan menyebabkan hujan di laut'],
+                                ],
+                                'correctAnswers' => [1],
+                            ],
+                            [
+                                'text' =>
+                                    'Jika tidak ada rotasi Bumi, maka... Apa yang akan terjadi pada kehidupan di Bumi?',
+                                'type' => 'single',
+                                'options' => [
+                                    ['text' => 'A. Siang dan malam tetap terjadi seperti biasa'],
+                                    ['text' => 'B. Musim akan lebih cepat berubah'],
+                                    [
+                                        'text' =>
+                                            'C. Hanya satu sisi Bumi yang terus mengalami siang, sisi lain malam terus',
+                                    ],
+                                    ['text' => 'D. Bulan akan tampak lebih besar'],
+                                ],
+                                'correctAnswers' => [2],
+                            ],
+                            [
+                                'text' =>
+                                    'Mengapa gerhana Matahari tidak terjadi setiap bulan, padahal Bulan terus mengelilingi Bumi?',
+                                'type' => 'single',
+                                'options' => [
+                                    ['text' => 'A. Karena Bumi kadang tidak terlihat dari Bulan'],
+                                    ['text' => 'B. Karena posisi Bulan, Bumi, dan Matahari tidak selalu sejajar'],
+                                    ['text' => 'C. Karena cahaya Matahari sangat terang'],
+                                    ['text' => 'D. Karena Bulan tidak cukup besar untuk menutupi Matahari'],
+                                ],
+                                'correctAnswers' => [1],
+                            ],
+                        ];
+
+                    @endphp
+                    <div class="card card-body">
+                        <x-quiz title="Kuis" materi="matahari" :point="100"
+                        :questions="$questions" />
+                    </div>
                 </section>
                 <nav>
                     <ul class="pagination justify-content-center" id="pagination">

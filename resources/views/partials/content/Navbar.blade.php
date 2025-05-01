@@ -29,11 +29,12 @@
                     </div>
                 </li>
                 <li class="pc-h-item d-none d-md-inline-flex">
-                    <form class="header-search">
+                    <form class="header-search" onsubmit="event.preventDefault(); openSearchModalAndSync();">
                         <i data-feather="search" class="icon-search"></i>
-                        <input type="search" class="form-control" placeholder="Search here. . .">
+                        <input type="search" class="form-control" placeholder="cari materi!" id="searchInput">
                     </form>
                 </li>
+
             </ul>
         </div>
         <!-- [Mobile Media Block end] -->
@@ -56,13 +57,18 @@
                                     <h6 class="mb-1">{{ Auth::User()->name }}</h6>
                                     <span>{{ Auth::User()->role }}</span>
                                 </div>
-                                <a href="{{ route("auth.logout") }}" class="pc-head-link bg-transparent"><i
+                                <a href="{{ route('auth.logout') }}" class="pc-head-link bg-transparent"><i
                                         class="ti ti-power text-danger"></i></a>
                             </div>
                         </div>
                         <div class="tab-pane fade show active" id="drp-tab-1" role="tabpanel" aria-labelledby="drp-t1"
                             tabindex="0">
-                            <a href="{{ route("auth.logout") }}" class="dropdown-item">
+                            <a href="#" data-bs-toggle="modal" data-bs-target="#profileModal"
+                                class="dropdown-item">
+                                <i class="ti ti-user"></i>
+                                <span>Profile Pengguna</span>
+                            </a>
+                            <a href="{{ route('auth.logout') }}" class="dropdown-item">
                                 <i class="ti ti-power"></i>
                                 <span>Logout</span>
                             </a>
@@ -73,3 +79,23 @@
         </div>
     </div>
 </header>
+
+<x-user-profile />
+<div class="modal fade" id="searchModal" tabindex="-1" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="searchModalLabel">Cari Materi!</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <!-- Search Input inside Modal -->
+                <input type="search" class="form-control mb-3" id="modalSearchInput" oninput="searchMenu()"
+                    placeholder="Search menu...">
+
+                <!-- List of Search Results -->
+                <ul class="list-group" id="searchResultsModal"></ul>
+            </div>
+        </div>
+    </div>
+</div>

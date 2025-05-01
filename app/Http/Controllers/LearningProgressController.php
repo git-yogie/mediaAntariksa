@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Models;
+namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\LearningProgress;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Database\Eloquent\Model;
 
-class LearningProgress extends Model
+class LearningProgressController extends Controller
 {
     public function set_progress(Request $request)
     {

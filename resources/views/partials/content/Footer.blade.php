@@ -2,7 +2,7 @@
     <div class="footer-wrapper container-fluid">
         <div class="row">
             <div class="col-sm my-1">
-                <p class="m-0">{{ env("APP_NAME") }} &#9829;
+                <p class="m-0">{{ env('APP_NAME') }} &#9829;
                 </p>
             </div>
             <div class="col-auto my-1">
@@ -13,3 +13,4 @@
         </div>
     </div>
 </footer>
+

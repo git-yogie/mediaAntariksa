@@ -3,6 +3,7 @@
 @section('page-name', 'Bulan')
 @section('page-description', 'Berkenalan dengan Bulan')
 
+
 @section('content')
     <div class="pc-container">
         <div class="pc-content">
@@ -342,6 +343,7 @@
                         </button>
                     </div>
 
+                  
                 </section>
                 <section id="page-3">
                     <div class="container">
@@ -375,23 +377,23 @@
                                 <div class="col-md-6">
                                     <div class="border-start border-4 border-primary ps-3">
                                         <h5 class="fw-bold">📱 Telepon Pintar</h5>
-                                        <img src="{{ asset('images/content/telpon.png') }}"
-                                        alt="Kemiringan Bumi" class="img-fluid rounded shadow-sm" style="height: 300px;">
+                                        <img src="{{ asset('images/content/telpon.png') }}" alt="Kemiringan Bumi"
+                                            class="img-fluid rounded shadow-sm" style="height: 300px;">
                                         <p>Pada tahun 1990, tim dari NASA mengembangkan kamera kecil berkualitas tinggi
                                             untuk pesawat luar angkasa. Teknologi ini sekarang digunakan di kamera HP kita.
                                             Jadi, selfie-mu ada campur tangan NASA juga!</p>
                                     </div>
                                     <div class="border-start border-4 border-success ps-3 mt-4">
                                         <h5 class="fw-bold">💧 Alat Pemurnian Air</h5>
-                                        <img src="{{ asset('images/content/pemurnian air.png') }}"
-                                        alt="Kemiringan Bumi" class="img-fluid rounded shadow-sm" style="height: 300px;">
+                                        <img src="{{ asset('images/content/pemurnian air.png') }}" alt="Kemiringan Bumi"
+                                            class="img-fluid rounded shadow-sm" style="height: 300px;">
                                         <p>Dikembangkan tahun 1960 untuk astronot, sekarang digunakan luas di Bumi untuk
                                             filter air minum. Air galon bersih? Thanks to luar angkasa!</p>
                                     </div>
                                     <div class="border-start border-4 border-warning ps-3 mt-4">
                                         <h5 class="fw-bold">🚗 Transportasi</h5>
-                                        <img src="{{ asset('images/content/transportasi.jpg') }}"
-                                        alt="Kemiringan Bumi" class="img-fluid rounded shadow-sm" style="height: 300px;">
+                                        <img src="{{ asset('images/content/transportasi.jpg') }}" alt="Kemiringan Bumi"
+                                            class="img-fluid rounded shadow-sm" style="height: 300px;">
                                         <p>Teknologi luar angkasa membantu pengembangan mobil listrik dan pesawat modern.
                                             Aerodinamis? Itu hasil riset antariksa juga loh.</p>
                                     </div>
@@ -400,7 +402,8 @@
                                     <div class="border-start border-4 border-danger ps-3">
                                         <h5 class="fw-bold">🏥 Teknologi Kesehatan</h5>
                                         <img src="{{ asset('images/content/medical-banner-with-doctor-patient.jpg') }}"
-                                        alt="Kemiringan Bumi" class="img-fluid rounded shadow-sm" style="height: 300px;">
+                                            alt="Kemiringan Bumi" class="img-fluid rounded shadow-sm"
+                                            style="height: 300px;">
                                         <p>Dari alat monitor kesehatan astronot, berkembang jadi pemicu jantung, alat
                                             pengobatan kanker, bahkan lensa antigores yang terinspirasi dari helm astronot!
                                         </p>
@@ -408,7 +411,8 @@
                                     <div class="border-start border-4 border-info ps-3 mt-4">
                                         <h5 class="fw-bold">🔌 Peralatan Nirkabel</h5>
                                         <img src="{{ asset('images/content/disassembled-radio-device-cabels.jpg') }}"
-                                        alt="Kemiringan Bumi" class="img-fluid rounded shadow-sm" style="height: 300px;">
+                                            alt="Kemiringan Bumi" class="img-fluid rounded shadow-sm"
+                                            style="height: 300px;">
                                         <p>Untuk memudahkan gerak astronot, dikembangkan alat elektronik portabel seperti
                                             laptop ringan dan earphone wireless. Sekarang kita pakai tiap hari tanpa sadar.
                                         </p>

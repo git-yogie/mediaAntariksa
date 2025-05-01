@@ -47,4 +47,19 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function learningProgress()
+    {
+        return $this->hasMany(learningProgress::class);
+    }
+
+    public function countPoint()
+    {
+        return $this->hasMany(learningProgress::class)->sum('point');
+    }
+
+    public function evaluasi()
+    {
+        return $this->hasMany(quiz::class, "user_id");
+    }
 }

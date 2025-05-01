@@ -51,6 +51,115 @@
                             </div>
                         </div>
                     </div>
+
+                </section>
+                <section id="page-2">
+                    @php
+                        $items = [
+                            ['name' => 'Saturnus', 'image' => 'content/Saturnus.png'],
+                            ['name' => 'Mars', 'image' => 'content/Mars.png'],
+                            ['name' => 'Bumi', 'image' => 'content/Bumi.png'],
+                            ['name' => 'Uranus', 'image' => 'content/Uranus.png'],
+                            ['name' => 'Merkurius', 'image' => 'content/Merkurius.png'],
+                            ['name' => 'Venus', 'image' => 'content/Venus.png'],
+                            ['name' => 'Neptunus', 'image' => 'content/Neptunus.png'],
+                            ['name' => 'Jupiter', 'image' => 'content/Jupiter.png'],
+                        ];
+
+                        $correctOrder = [
+                            'Merkurius',
+                            'Venus',
+                            'Bumi',
+                            'Mars',
+                            'Jupiter',
+                            'Saturnus',
+                            'Uranus',
+                            'Neptunus',
+                        ];
+                    @endphp
+
+                    <div class="container my-4">
+                        <div class="card shadow-sm border-0">
+                            <div class="card-body">
+                                <h5 class="card-title">🪐 Planet dalam Tata Surya</h5>
+                                <x-order-drag-and-drop title="Urutkan Planet Berdasarkan Jarak dari Matahari"
+                                    instruction="Urutkan Planet-planet di tata surya berdasarkan jaraknya dengan matahari"
+                                    materi="mengenal-lebih-dalam-tentang-planet" :point="100" :items="$items"
+                                    :correctOrder="$correctOrder" />
+                            </div>
+
+                        </div>
+                    </div>
+                </section>
+                <section id="page-6">
+                    @php
+                        $questions = [
+                            [
+                                'text' =>
+                                    'Tahukah kamu? Semua planet di tata surya mengelilingi Matahari. Apa yang membuat planet-planet tetap mengorbit dan tidak terlepas menjauh dari Matahari?',
+                                'type' => 'single',
+                                'options' => [
+                                    ['text' => 'A. Suhu tinggi di Matahari'],
+                                    ['text' => 'B. Gaya gravitasi Matahari'],
+                                    ['text' => 'C. Cahaya yang dipantulkan'],
+                                    ['text' => 'D. Kecepatan rotasi planet'],
+                                ],
+                                'correctAnswers' => [1],
+                            ],
+                            [
+                                'text' =>
+                                    'Bumi memiliki satelit alami yang disebut Bulan. Apa fungsi utama Bulan bagi Bumi?',
+                                'type' => 'single',
+                                'options' => [
+                                    ['text' => 'A. Menghasilkan cahaya bagi Bumi'],
+                                    ['text' => 'B. Mengatur cuaca Bumi'],
+                                    ['text' => 'C. Menyebabkan pasang surut air laut'],
+                                    ['text' => 'D. Menjadi sumber panas bagi Bumi'],
+                                ],
+                                'correctAnswers' => [2],
+                            ],
+                            [
+                                'text' =>
+                                    'Bulan memiliki banyak kawah akibat tabrakan dengan benda langit lain. Mengapa Bumi tidak memiliki kawah sebanyak Bulan?',
+                                'type' => 'single',
+                                'options' => [
+                                    ['text' => 'A. Karena Bumi lebih dekat ke Matahari'],
+                                    ['text' => 'B. Karena Bumi memiliki atmosfer yang melindungi dari benturan'],
+                                    ['text' => 'C. Karena Bumi lebih besar dari Bulan'],
+                                    ['text' => 'D. Karena Bumi tidak memiliki satelit'],
+                                ],
+                                'correctAnswers' => [1],
+                            ],
+                            [
+                                'text' =>
+                                    'Planet-planet di tata surya mengelilingi Matahari dengan jarak yang berbeda. Mengapa planet yang lebih dekat dengan Matahari memiliki suhu yang lebih tinggi?',
+                                'type' => 'single',
+                                'options' => [
+                                    ['text' => 'A. Karena mereka lebih besar'],
+                                    ['text' => 'B. Karena mereka lebih padat'],
+                                    ['text' => 'C. Karena mereka menerima lebih banyak cahaya dan panas dari Matahari'],
+                                    ['text' => 'D. Karena mereka memiliki atmosfer yang lebih tebal'],
+                                ],
+                                'correctAnswers' => [2],
+                            ],
+                            [
+                                'text' =>
+                                    'Planet-planet dalam tata surya terdiri dari planet berbatu dan planet gas. Mengapa planet berbatu lebih cocok untuk dihuni dibanding planet gas?',
+                                'type' => 'single',
+                                'options' => [
+                                    ['text' => 'A. Karena planet berbatu memiliki atmosfer yang lebih tebal'],
+                                    ['text' => 'B. Karena planet berbatu memiliki permukaan yang padat'],
+                                    ['text' => 'C. Karena planet berbatu lebih besar'],
+                                    ['text' => 'D. Karena planet berbatu lebih dekat dengan Matahari'],
+                                ],
+                                'correctAnswers' => [1],
+                            ],
+                        ];
+
+                    @endphp
+                    <div class="card card-body">
+                        <x-quiz title="Kuis" materi="planet-sebagai-anggota-tata-surya" :point="100" :questions="$questions" />
+                    </div>
                 </section>
 
                 <nav>

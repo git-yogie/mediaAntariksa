@@ -25,8 +25,8 @@
                 <section id="page-1">
                     <div class="card shadow-sm">
                         <div class="card-body">
-                            <div class="text-start mb-2 ">
-                                <img src="{{ asset('images\content\bumi-bulan-matahari.jpg') }}" class="img-fluid shadow-sm"
+                            <div class="text-center mb-2 ">
+                                <img src="{{ asset('images\content\bumi-bulan-matahari.jpg') }}" style="width: fit-content;" class="img-fluid shadow-sm"
                                     alt="">
                             </div>
                             <h3 class="card-title text-info">🌍 TAHUKAH KALIAN?</h3>

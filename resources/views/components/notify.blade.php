@@ -19,3 +19,27 @@
         }
     })
 </script>
+
+@if (session('success') || session('error'))
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const notyf = ew Notyf({
+                duration: 4000
+            });
+
+            @if (session('success'))
+                notyf.open({
+                    type: 'success',
+                    message: "{{ session('success') }}",
+                });
+            @endif
+
+            @if (session('error'))
+                notyf.open({
+                    type: 'error',
+                    message: "{{ session('error') }}",
+                });
+            @endif
+        });
+    </script>
+@endif

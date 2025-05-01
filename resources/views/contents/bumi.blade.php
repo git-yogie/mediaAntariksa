@@ -1,7 +1,7 @@
 @extends('layouts.content-layout')
 
 @section('page-name', 'Bumi')
-@section('page-description',"Mengenal Bumi")
+@section('page-description', 'Mengenal Bumi')
 
 @section('content')
     <div class="pc-container">
@@ -27,9 +27,12 @@
                         <h2 class="text-success mb-4">Berkenalan Lebih Dalam dengan Planet Bumi</h2>
 
                         <figure class="text-center mb-4">
-                            <img src="{{ asset("images\content\bumi-background.jpeg") }}" class="img-fluid rounded shadow-sm" alt="Gambar Bumi">
+                            <img src="{{ asset('images\content\bumi-background.jpeg') }}"
+                                class="img-fluid rounded shadow-sm" alt="Gambar Bumi">
                             <figcaption class="mt-2 text-muted">Gambar 2: Bumi</figcaption>
                         </figure>
+
+
 
                         <p>
                             <strong>Bumi</strong> merupakan salah satu dari delapan planet yang mengelilingi Matahari.
@@ -71,6 +74,18 @@
                             Perbedaan kecil ini mungkin tidak terlalu besar, tapi penting dalam menghitung keliling Bumi
                             dan memahami berbagai fenomena alam seperti gaya gravitasi, arus laut, hingga satelit.
                         </p>
+
+                    </div>
+                    <div class="card card-body shadow-sm">
+                        <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+
+                            <strong>Cermati bentuk bumi berikut</strong> kamu bisa berinteraksi dengan klik kanan pada mouse untuk putar, klik kiri untuk menggeser, dan scroll untuk zoom
+                        </div>
+
+                        <x-Planet width="100%" height="500px" id="planet-1"
+                            texture="{{ asset('textures/earth-texture.jpg') }}" />
+
                     </div>
                 </section>
                 <nav>
@@ -83,7 +98,7 @@
     </div>
     @include('scripts.content-scripts', [
         'nextLink' => route('materi', 'bulan'),
-        'prevLink' => route("materi","bumi-bulan-dan-matahari"),
+        'prevLink' => route('materi', 'bumi-bulan-dan-matahari'),
     ])
 @endsection
 
