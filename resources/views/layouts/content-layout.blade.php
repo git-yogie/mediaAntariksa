@@ -31,6 +31,11 @@
     <!-- [Template CSS Files] -->
     <link rel="stylesheet" href="{{ asset('assets') }}/css/style.css" id="main-style-link">
     <link rel="stylesheet" href="{{ asset('assets') }}/css/style-preset.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.css">
+    <link rel="stylesheet" type="text/css"
+        href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/regular/style.css" />
+    <link rel="stylesheet" type="text/css"
+        href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/fill/style.css" />
 
 </head>
 <!-- [Head] end -->
@@ -67,8 +72,8 @@
     <script src="{{ asset('assets') }}/js/pcoded.js"></script>
     <script src="{{ asset('assets') }}/js/plugins/feather.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="{{asset('assets/js/axios.min.js')}}"></script>
-
+    <script src="{{ asset('js/axios.min.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
 
 
     <script>

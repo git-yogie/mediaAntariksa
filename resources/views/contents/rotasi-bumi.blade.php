@@ -190,76 +190,76 @@
                             </div>
                         </div>
                 </section>
-                <section id="page-6">
-                    @php
-                        $questions = [
-                            [
-                                'text' =>
-                                    'Tahukah kamu? Siang dan malam bisa terjadi karena Bumi berputar. Kalau Bumi tidak berputar, apa yang bisa terjadi?',
-                                'type' => 'single',
-                                'options' => [
-                                    ['text' => 'A. Siang dan malam tetap ada'],
-                                    ['text' => 'B. Matahari tidak bersinar'],
-                                    ['text' => 'C. Hanya ada siang terus atau malam terus'],
-                                    ['text' => 'D. Awan jadi tidak bergerak'],
-                                ],
-                                'correctAnswers' => [2],
+            <section id="page-6">
+                @php
+                    $questions = [
+                        [
+                            'text' =>
+                                'Tahukah kamu? Siang dan malam bisa terjadi karena Bumi berputar. Kalau Bumi tidak berputar, apa yang bisa terjadi?',
+                            'type' => 'single',
+                            'options' => [
+                                ['text' => 'A. Siang dan malam tetap ada'],
+                                ['text' => 'B. Matahari tidak bersinar'],
+                                ['text' => 'C. Hanya ada siang terus atau malam terus'],
+                                ['text' => 'D. Awan jadi tidak bergerak'],
                             ],
-                            [
-                                'text' =>
-                                    'Kamu melihat bayangan pohon berubah posisi sepanjang hari. Itu terjadi karena…',
-                                'type' => 'single',
-                                'options' => [
-                                    ['text' => 'A. Awan menutupi matahari'],
-                                    ['text' => 'B. Bulan bergerak'],
-                                    ['text' => 'C. Bumi berputar'],
-                                    ['text' => 'D. Angin bertiup kencang'],
-                                ],
-                                'correctAnswers' => [2],
+                            'correctAnswers' => [2],
+                        ],
+                        [
+                            'text' =>
+                                'Kamu melihat bayangan pohon berubah posisi sepanjang hari. Itu terjadi karena…',
+                            'type' => 'single',
+                            'options' => [
+                                ['text' => 'A. Awan menutupi matahari'],
+                                ['text' => 'B. Bulan bergerak'],
+                                ['text' => 'C. Bumi berputar'],
+                                ['text' => 'D. Angin bertiup kencang'],
                             ],
-                            [
-                                'text' =>
-                                    'Di Indonesia bagian timur seperti Papua, matahari terbit lebih dulu. Kenapa begitu?',
-                                'type' => 'single',
-                                'options' => [
-                                    ['text' => 'A. Karena lebih dekat ke matahari'],
-                                    ['text' => 'B. Karena lebih panas'],
-                                    ['text' => 'C. Karena Bumi berputar dari barat ke timur'],
-                                    ['text' => 'D. Karena lebih banyak gunung'],
-                                ],
-                                'correctAnswers' => [2],
+                            'correctAnswers' => [2],
+                        ],
+                        [
+                            'text' =>
+                                'Di Indonesia bagian timur seperti Papua, matahari terbit lebih dulu. Kenapa begitu?',
+                            'type' => 'single',
+                            'options' => [
+                                ['text' => 'A. Karena lebih dekat ke matahari'],
+                                ['text' => 'B. Karena lebih panas'],
+                                ['text' => 'C. Karena Bumi berputar dari barat ke timur'],
+                                ['text' => 'D. Karena lebih banyak gunung'],
                             ],
-                            [
-                                'text' =>
-                                    'Kalau kamu menelepon temanmu di negara lain dan dia bilang “masih malam di sini”, itu bisa terjadi karena…',
-                                'type' => 'single',
-                                'options' => [
-                                    ['text' => 'A. Bulan terlalu terang'],
-                                    ['text' => 'B. Negara itu hujan'],
-                                    ['text' => 'C. Bumi sedang diam'],
-                                    ['text' => 'D. Perbedaan waktu karena rotasi Bumi'],
-                                ],
-                                'correctAnswers' => [3],
+                            'correctAnswers' => [2],
+                        ],
+                        [
+                            'text' =>
+                                'Kalau kamu menelepon temanmu di negara lain dan dia bilang “masih malam di sini”, itu bisa terjadi karena…',
+                            'type' => 'single',
+                            'options' => [
+                                ['text' => 'A. Bulan terlalu terang'],
+                                ['text' => 'B. Negara itu hujan'],
+                                ['text' => 'C. Bumi sedang diam'],
+                                ['text' => 'D. Perbedaan waktu karena rotasi Bumi'],
                             ],
-                            [
-                                'text' => 'Untuk menunjukkan siang dan malam, kamu bisa pakai…',
-                                'type' => 'single',
-                                'options' => [
-                                    ['text' => 'A. Kipas angin dan lilin'],
-                                    ['text' => 'B. Bola dan senter'],
-                                    ['text' => 'C. Payung dan batu'],
-                                    ['text' => 'D. Buku dan penggaris'],
-                                ],
-                                'correctAnswers' => [1],
+                            'correctAnswers' => [3],
+                        ],
+                        [
+                            'text' => 'Untuk menunjukkan siang dan malam, kamu bisa pakai…',
+                            'type' => 'single',
+                            'options' => [
+                                ['text' => 'A. Kipas angin dan lilin'],
+                                ['text' => 'B. Bola dan senter'],
+                                ['text' => 'C. Payung dan batu'],
+                                ['text' => 'D. Buku dan penggaris'],
                             ],
-                        ];
+                            'correctAnswers' => [1],
+                        ],
+                    ];
 
-                    @endphp
-                     <div class="card card-body">
-                        <x-quiz title="Kuis" materi="rotasi-bumi" :point="100"
-                        :questions="$questions" />
-                    </div>
-                </section>
+                @endphp
+                    <div class="card card-body">
+                    <x-quiz title="Kuis" materi="rotasi-bumi" :point="100"
+                    :questions="$questions" />
+                </div>
+            </section>
                 <nav>
                     <ul class="pagination justify-content-center" id="pagination">
 

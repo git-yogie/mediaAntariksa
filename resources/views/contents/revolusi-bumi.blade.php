@@ -261,91 +261,93 @@
                             </div>
                         </div>
                     </div>
+                </section>
+                <section id="page-6">
+                    @php
+                        $questions = [
+                            [
+                                'text' =>
+                                    'Tahukah kamu? Di negara-negara empat musim seperti Jepang, tanaman apel hanya bisa tumbuh subur pada musim tertentu. Hal ini berkaitan dengan revolusi Bumi. Mengapa tanaman apel tidak bisa tumbuh di Indonesia yang hanya memiliki dua musim?',
+                                'type' => 'single',
+                                'options' => [
+                                    ['text' => 'A. Karena revolusi Bumi tidak terjadi di Indonesia'],
+                                    [
+                                        'text' =>
+                                            'B. Karena Indonesia tidak memiliki musim dingin akibat letaknya di garis khatulistiwa',
+                                    ],
+                                    ['text' => 'C. Karena Indonesia terlalu panas sepanjang tahun'],
+                                    ['text' => 'D. Karena Bumi tidak berputar di wilayah tropis'],
+                                ],
+                                'correctAnswers' => [1],
+                            ],
+                            [
+                                'text' =>
+                                    'Budi memperhatikan bahwa siang hari menjadi lebih lama daripada malam hari di bulan Juni. Ia penasaran mengapa hal itu bisa terjadi. Apa penjelasan yang paling tepat berdasarkan dampak revolusi Bumi?',
+                                'type' => 'single',
+                                'options' => [
+                                    ['text' => 'A. Karena Bumi berotasi lebih cepat'],
+                                    ['text' => 'B. Karena matahari lebih dekat ke Bumi'],
+                                    [
+                                        'text' =>
+                                            'C. Karena Bumi sedang condong ke arah utara yang mengalami musim panas',
+                                    ],
+                                    ['text' => 'D. Karena bulan memantulkan cahaya lebih banyak'],
+                                ],
+                                'correctAnswers' => [2],
+                            ],
+                            [
+                                'text' =>
+                                    'Bayangkan jika Bumi tidak memiliki kemiringan sumbu. Apa yang mungkin akan terjadi pada musim di Bumi?',
+                                'type' => 'single',
+                                'options' => [
+                                    ['text' => 'A. Musim akan menjadi lebih banyak'],
+                                    ['text' => 'B. Tidak akan ada perubahan musim seperti sekarang'],
+                                    ['text' => 'C. Suhu Bumi menjadi sangat panas'],
+                                    ['text' => 'D. Siang dan malam akan selalu sama panjang'],
+                                ],
+                                'correctAnswers' => [1],
+                            ],
+                            [
+                                'text' =>
+                                    'Jika kamu tinggal di Australia dan mengalami musim dingin, pada saat yang sama temanmu di Jepang sedang menikmati musim panas. Apa kesimpulan logis dari perbedaan musim tersebut?',
+                                'type' => 'single',
+                                'options' => [
+                                    ['text' => 'A. Matahari hanya menyinari bagian utara Bumi'],
+                                    ['text' => 'B. Sumbu Bumi tegak lurus terhadap Matahari'],
+                                    [
+                                        'text' =>
+                                            'C. Revolusi Bumi menyebabkan belahan Bumi utara dan selatan menerima sinar Matahari berbeda-beda',
+                                    ],
+                                    ['text' => 'D. Orbit Bumi berbentuk lingkaran sempurna'],
+                                ],
+                                'correctAnswers' => [2],
+                            ],
+                            [
+                                'text' =>
+                                    'Amira membaca di buku bahwa revolusi Bumi menyebabkan rasi bintang yang terlihat di langit malam berubah setiap bulan. Mengapa hal ini bisa terjadi?',
+                                'type' => 'single',
+                                'options' => [
+                                    ['text' => 'A. Karena Matahari berputar mengelilingi Bumi'],
+                                    ['text' => 'B. Karena posisi Bumi terhadap bintang berubah selama revolusi'],
+                                    ['text' => 'C. Karena bintang-bintang bergerak mengikuti arah Bumi'],
+                                    ['text' => 'D. Karena langit selalu berubah bentuk setiap malam'],
+                                ],
+                                'correctAnswers' => [1],
+                            ],
+                        ];
+
+                    @endphp
+                    <div class="card card-body">
+                        <x-quiz title="Kuis" materi="rotasi-bumi" :point="100" :questions="$questions" />
+                    </div>
+                </section>
+                <nav>
+                    <ul class="pagination justify-content-center" id="pagination">
+
+                    </ul>
+                </nav>
             </div>
-            </section>
-            <section id="page-6">
-                @php
-                    $questions = [
-                        [
-                            'text' =>
-                                'Tahukah kamu? Di negara-negara empat musim seperti Jepang, tanaman apel hanya bisa tumbuh subur pada musim tertentu. Hal ini berkaitan dengan revolusi Bumi. Mengapa tanaman apel tidak bisa tumbuh di Indonesia yang hanya memiliki dua musim?',
-                            'type' => 'single',
-                            'options' => [
-                                ['text' => 'A. Karena revolusi Bumi tidak terjadi di Indonesia'],
-                                [
-                                    'text' =>
-                                        'B. Karena Indonesia tidak memiliki musim dingin akibat letaknya di garis khatulistiwa',
-                                ],
-                                ['text' => 'C. Karena Indonesia terlalu panas sepanjang tahun'],
-                                ['text' => 'D. Karena Bumi tidak berputar di wilayah tropis'],
-                            ],
-                            'correctAnswers' => [1],
-                        ],
-                        [
-                            'text' =>
-                                'Budi memperhatikan bahwa siang hari menjadi lebih lama daripada malam hari di bulan Juni. Ia penasaran mengapa hal itu bisa terjadi. Apa penjelasan yang paling tepat berdasarkan dampak revolusi Bumi?',
-                            'type' => 'single',
-                            'options' => [
-                                ['text' => 'A. Karena Bumi berotasi lebih cepat'],
-                                ['text' => 'B. Karena matahari lebih dekat ke Bumi'],
-                                ['text' => 'C. Karena Bumi sedang condong ke arah utara yang mengalami musim panas'],
-                                ['text' => 'D. Karena bulan memantulkan cahaya lebih banyak'],
-                            ],
-                            'correctAnswers' => [2],
-                        ],
-                        [
-                            'text' =>
-                                'Bayangkan jika Bumi tidak memiliki kemiringan sumbu. Apa yang mungkin akan terjadi pada musim di Bumi?',
-                            'type' => 'single',
-                            'options' => [
-                                ['text' => 'A. Musim akan menjadi lebih banyak'],
-                                ['text' => 'B. Tidak akan ada perubahan musim seperti sekarang'],
-                                ['text' => 'C. Suhu Bumi menjadi sangat panas'],
-                                ['text' => 'D. Siang dan malam akan selalu sama panjang'],
-                            ],
-                            'correctAnswers' => [1],
-                        ],
-                        [
-                            'text' =>
-                                'Jika kamu tinggal di Australia dan mengalami musim dingin, pada saat yang sama temanmu di Jepang sedang menikmati musim panas. Apa kesimpulan logis dari perbedaan musim tersebut?',
-                            'type' => 'single',
-                            'options' => [
-                                ['text' => 'A. Matahari hanya menyinari bagian utara Bumi'],
-                                ['text' => 'B. Sumbu Bumi tegak lurus terhadap Matahari'],
-                                [
-                                    'text' =>
-                                        'C. Revolusi Bumi menyebabkan belahan Bumi utara dan selatan menerima sinar Matahari berbeda-beda',
-                                ],
-                                ['text' => 'D. Orbit Bumi berbentuk lingkaran sempurna'],
-                            ],
-                            'correctAnswers' => [2],
-                        ],
-                        [
-                            'text' =>
-                                'Amira membaca di buku bahwa revolusi Bumi menyebabkan rasi bintang yang terlihat di langit malam berubah setiap bulan. Mengapa hal ini bisa terjadi?',
-                            'type' => 'single',
-                            'options' => [
-                                ['text' => 'A. Karena Matahari berputar mengelilingi Bumi'],
-                                ['text' => 'B. Karena posisi Bumi terhadap bintang berubah selama revolusi'],
-                                ['text' => 'C. Karena bintang-bintang bergerak mengikuti arah Bumi'],
-                                ['text' => 'D. Karena langit selalu berubah bentuk setiap malam'],
-                            ],
-                            'correctAnswers' => [1],
-                        ],
-                    ];
-
-                @endphp
-                <div class="card card-body">
-                    <x-quiz title="Kuis" materi="rotasi-bumi" :point="100" :questions="$questions" />
-                </div>
-            </section>
-            <nav>
-                <ul class="pagination justify-content-center" id="pagination">
-
-                </ul>
-            </nav>
         </div>
-    </div>
     </div>
     @include('scripts.content-scripts', [
         'nextLink' => route('quiz.prepare', 'latihan-2'),

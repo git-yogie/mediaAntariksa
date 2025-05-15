@@ -13,27 +13,7 @@
                         <i class="ti ti-menu-2"></i>
                     </a>
                 </li>
-                <li class="dropdown pc-h-item d-inline-flex d-md-none">
-                    <a class="pc-head-link dropdown-toggle arrow-none m-0" data-bs-toggle="dropdown" href="#"
-                        role="button" aria-haspopup="false" aria-expanded="false">
-                        <i class="ti ti-search"></i>
-                    </a>
-                    <div class="dropdown-menu pc-h-dropdown drp-search">
-                        <form class="px-3">
-                            <div class="form-group mb-0 d-flex align-items-center">
-                                <i data-feather="search"></i>
-                                <input type="search" class="form-control border-0 shadow-none"
-                                    placeholder="Search here. . .">
-                            </div>
-                        </form>
-                    </div>
-                </li>
-                <li class="pc-h-item d-none d-md-inline-flex">
-                    <form class="header-search" onsubmit="event.preventDefault(); openSearchModalAndSync();">
-                        <i data-feather="search" class="icon-search"></i>
-                        <input type="search" class="form-control" placeholder="cari materi!" id="searchInput">
-                    </form>
-                </li>
+
 
             </ul>
         </div>
@@ -46,7 +26,8 @@
                         <img src="{{ asset('assets') }}/images/user/avatar-2.jpg" alt="user-image" class="user-avtar">
                         <span>{{ Auth::User()->name }}</span>
 
-                        <span class="bg-primary rounded-3 ms-2 px-2 text-white">{{ Auth::User()->countPoint() }} Point</span>
+                        <span class="bg-primary rounded-3 ms-2 px-2 text-white">{{ Auth::User()->countPoint() }}
+                            Point</span>
                     </a>
                     <div class="dropdown-menu dropdown-user-profile dropdown-menu-end pc-h-dropdown">
                         <div class="dropdown-header">
@@ -87,7 +68,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="searchModalLabel">Cari Materi!</h5>
+                <h5 class="modal-title" id="searchModalLabel">Cari Fitur!</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">

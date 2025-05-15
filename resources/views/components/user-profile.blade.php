@@ -16,7 +16,7 @@
                     <li class="nav-item" role="presentation">
                         <button class="nav-link" id="accounts-tab" data-bs-toggle="tab" data-bs-target="#accounts"
                             type="button" role="tab" aria-controls="accounts" aria-selected="false">
-                            Akun Siswa
+                            Akun
                         </button>
                     </li>
                 </ul>
@@ -24,10 +24,10 @@
                 <div class="tab-content" id="myTabContent">
                     <div class="tab-pane fade show active p-3" id="profile" role="tabpanel"
                         aria-labelledby="profile-tab">
-                       <div class="alert alert-info">
-                            <p>Profile Siswa</p>
-                       </div>
 
+                       <div class="m-2 rounded-circle d-flex justify-content-center">
+                            <img src="{{ asset('assets') }}/images/user/avatar-2.jpg"  alt="user-image" class="user-avtar rounded-circle" style="width: 200px; height: 200px;">
+                       </div>
                        <div class="table">
                             <table class="table table-bordered">
                                 <tbody>

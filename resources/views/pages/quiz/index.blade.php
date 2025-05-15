@@ -67,7 +67,7 @@
             </div>
             <div class="col-md-3">
                 <div class="card  card-body rounded-0">
-                    <h4 class="mx-2 mb-2">Soal <span id="pages-show">1</span> / 20</h4>
+                    <h4 class="mx-2 mb-2">Soal <span id="pages-show">1</span> / {{ count($soalQuiz) }}</h4>
                     <div class="m-auto d-flex justify-content-center align-items-center flex-wrap">
 
                         @php $no = 1; @endphp

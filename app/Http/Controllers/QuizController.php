@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\Kuis_1;
+use App\Helpers\Kuis_2;
+use App\Helpers\Kuis_3;
+use App\Helpers\Kuis_4;
 use App\Helpers\Latihan_1;
 use App\Helpers\Latihan_2;
 use App\Helpers\Latihan_3;
@@ -39,6 +43,30 @@ class QuizController extends Controller
                 "type" => "Kuis",
                 "question" => Latihan_3::$question,
             ],
+            "kuis-1" => [
+                "title" => "Kuis 1",
+                "materi"=>"Menjelajah Bumi,Matahari, dan Bulan",
+                "type" => "Kuis",
+                "question" => Kuis_1::$questions,
+            ],
+            "kuis-2" => [
+                "title" => "Kuis 2",
+                "materi"=>"Rotasi Bumi",
+                "type" => "Kuis",
+                "question" => Kuis_2::$questions,
+            ],
+            "kuis-3" => [
+                "title" => "Kuis 3",
+                "materi"=>"Menjelajah Bumi dan Antariksa",
+                "type" => "Kuis",
+                "question" => Kuis_3::$questions,
+            ],
+            "kuis-4" => [
+                "title" => "Kuis 4",
+                "materi"=>"Menjelajah Bumi dan Antariksa",
+                "type" => "Kuis",
+                "question" => Kuis_4::$questions,
+            ],
         ];
     }
 
@@ -74,7 +102,7 @@ class QuizController extends Controller
         $materi = $param;
         $info = $this->quizInfo[$param];
 
-        shuffle($soalQuiz);
+        // shuffle($soalQuiz);
 
         return view("pages.quiz.index", compact("soalQuiz", "materi", "info"));
     }
