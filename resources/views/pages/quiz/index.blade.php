@@ -15,7 +15,7 @@
     <nav class="navbar text-white sticky-top bg-primary">
         <div class="container">
             <a class="navbar-brand text-white" href="#">
-                <h4>Kuis {{ $materi }}</h4>
+                <h4>Kuis {{ $title }}</h4>
             </a>
             <div class="d-flex align-items-stretch justify-content-start ">
                 <h2 class="m-0"><span class="badge text-bg-warning me-3" id="waktu-durasi">12 : 90</span></h2>
@@ -107,7 +107,7 @@
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title">Hasil Kuis {{ $materi }}</h5>
+                            <h5 class="modal-title">Hasil Kuis {{ $title }}</h5>
                         </div>
                         <div class="modal-body" id="modal-hasil">
 

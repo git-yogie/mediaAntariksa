@@ -68,10 +68,10 @@
                                     <div class="card">
                                         <div class="card-body">
                                             <h6 class="mb-2 f-w-400 text-muted">Jumlah Siswa Mengerjakan</h6>
-                                            <h4 class="mb-0">{{ $jumlah_dikerjakan }} / {{ $jumlah_belum_dikerjakan }}
+                                            <h4 class="mb-0">{{ $jumlah_dikerjakan }} / {{ count($users) }}
 
                                                 <span class="badge bg-light-info border border-info">
-                                                    {{ $jumlah_dikerjakan > 0 ? round(($jumlah_dikerjakan / $jumlah_belum_dikerjakan) * 100, 2) : 0 }}%
+                                                    {{ $jumlah_dikerjakan > 0 ? round(($jumlah_dikerjakan / count($users)) * 100, 2) : 0 }}%
                                                 </span>
                                             </h4>
 
@@ -113,7 +113,7 @@
                                         <div class="card-body">
                                             <h6 class="mb-2 f-w-400 text-muted">Jumlah Lulus</h6>
                                             <h4 class="mb-0">
-                                                {{ $jumlah_lulus }}
+                                                {{ $jumlah_lulus }} / {{ count($users) }}
                                                 <span class="badge bg-light-success border border-success">
                                                     {{ $jumlah_dikerjakan > 0 ? round(($jumlah_lulus / $jumlah_dikerjakan) * 100, 2) : 0 }}%
                                                 </span>

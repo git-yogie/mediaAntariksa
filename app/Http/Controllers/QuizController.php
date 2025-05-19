@@ -26,46 +26,22 @@ class QuizController extends Controller
     {
         $this->quizInfo = [
             "latihan-1" => [
-                "title" => "Latihan 1",
+                "title" => "Kuis 1",
                 "materi"=>"Menjelajah Bumi dan Antariksa",
                 "type" => "Kuis",
                 "question" => Latihan_1::$question,
             ],
             "latihan-2" => [
-                "title" => "Latihan 2",
+                "title" => "Kuis 2",
                 "materi"=>"Dampak Rotasi dan Revolusi Bumi",
                 "type" => "Kuis",
                 "question" => Latihan_2::$question,
             ],
             "latihan-3" => [
-                "title" => "Latihan 3",
-                "materi"=>"Menjelajah Bumi dan Antariksa",
-                "type" => "Kuis",
-                "question" => Latihan_3::$question,
-            ],
-            "kuis-1" => [
-                "title" => "Kuis 1",
-                "materi"=>"Menjelajah Bumi,Matahari, dan Bulan",
-                "type" => "Kuis",
-                "question" => Kuis_1::$questions,
-            ],
-            "kuis-2" => [
-                "title" => "Kuis 2",
-                "materi"=>"Rotasi Bumi",
-                "type" => "Kuis",
-                "question" => Kuis_2::$questions,
-            ],
-            "kuis-3" => [
                 "title" => "Kuis 3",
                 "materi"=>"Menjelajah Bumi dan Antariksa",
                 "type" => "Kuis",
-                "question" => Kuis_3::$questions,
-            ],
-            "kuis-4" => [
-                "title" => "Kuis 4",
-                "materi"=>"Menjelajah Bumi dan Antariksa",
-                "type" => "Kuis",
-                "question" => Kuis_4::$questions,
+                "question" => Latihan_3::$question,
             ],
         ];
     }
@@ -101,10 +77,11 @@ class QuizController extends Controller
         $soalQuiz = $this->quizInfo[$param]["question"];
         $materi = $param;
         $info = $this->quizInfo[$param];
+        $title = $this->quizInfo[$param]["title"];
 
         // shuffle($soalQuiz);
 
-        return view("pages.quiz.index", compact("soalQuiz", "materi", "info"));
+        return view("pages.quiz.index", compact("soalQuiz", "materi", "info","title"));
     }
 
     public function submit(Request $request)

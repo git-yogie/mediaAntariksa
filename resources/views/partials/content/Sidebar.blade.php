@@ -43,7 +43,7 @@
                                 dalam dengan Matahari</a></li>
                         {{-- <li class="pc-item"><a class="pc-link" href="{{ route("quiz.prepare","kuis-1") }}">Kuis</a></li> --}}
                         <li class="pc-item"><a class="pc-link"
-                                href="{{ route('quiz.prepare', 'latihan-1') }}">Latihan</a></li>
+                                href="{{ route('quiz.prepare', 'latihan-1') }}">Kuis</a></li>
                     </ul>
                 </li>
                 <li class="pc-item pc-hasmenu">
@@ -60,7 +60,7 @@
                                 Bumi</a></li>
                         {{-- <li class="pc-item"><a class="pc-link" href="{{ route("quiz.prepare","kuis-3") }}">Kuis Revolusi Bumi</a></li> --}}
                         <li class="pc-item"><a class="pc-link"
-                                href="{{ route('quiz.prepare', 'latihan-2') }}">Latihan</a></li>
+                                href="{{ route('quiz.prepare', 'latihan-2') }}">Kuis</a></li>
                     </ul>
                 </li>
                 <li class="pc-item pc-hasmenu">
@@ -83,7 +83,7 @@
                                 benda langit</a></li>
                         {{-- <li class="pc-item"><a class="pc-link" href="{{ route("quiz.prepare","kuis-4") }}">Kuis Menjelajah Tata surya</a></li> --}}
                         <li class="pc-item"><a class="pc-link"
-                                href="{{ route('quiz.prepare', 'latihan-3') }}">Latihan</a></li>
+                                href="{{ route('quiz.prepare', 'latihan-3') }}">Kuis</a></li>
                     </ul>
                 </li>
                 <li class="pc-item pc-caption">

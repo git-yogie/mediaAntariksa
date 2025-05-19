@@ -55,7 +55,7 @@
                     <div class="col-md-6">
                         <div class="card shadow border-0">
                             <div class="card-header">
-                                <h5>Informasi Latihan</h5>
+                                <h5>Informasi Kuis</h5>
                             </div>
                             <div class="card-body p-4 ">
                                 <div class="table-responsive">
