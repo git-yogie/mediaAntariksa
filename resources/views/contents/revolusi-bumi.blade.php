@@ -338,7 +338,7 @@
 
                     @endphp
                     <div class="card card-body">
-                        <x-quiz title="Kuis" materi="rotasi-bumi" :point="100" :questions="$questions" />
+                        <x-quiz title="latihan-4" materi="dampak-gerak-rotasi-dan-revolusi-bumi" :point="100" :questions="$questions" />
                     </div>
                 </section>
                 <nav>

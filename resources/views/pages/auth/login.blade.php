@@ -33,7 +33,6 @@
     <link rel="stylesheet" href="{{ asset('/') }}assets/css/style-preset.css">
     @stack('styles')
     <link rel="stylesheet" data-navigate-track href="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.css">
-    {!! ToastMagic::styles() !!}
 </head>
 <!-- [Head] end -->
 <!-- [Body] Start -->
@@ -65,9 +64,6 @@
     <script>
         layout_change('light');
     </script>
-
-    {!! ToastMagic::scripts() !!}
-
 
     <script>
         change_box_container('false');

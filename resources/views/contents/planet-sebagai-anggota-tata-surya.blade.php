@@ -82,9 +82,9 @@
                         <div class="card shadow-sm border-0">
                             <div class="card-body">
                                 <h5 class="card-title">🪐 Planet dalam Tata Surya</h5>
-                                <x-order-drag-and-drop title="Urutkan Planet Berdasarkan Jarak dari Matahari"
+                                <x-order-drag-and-drop title="latihan-1"
                                     instruction="Urutkan Planet-planet di tata surya berdasarkan jaraknya dengan matahari"
-                                    materi="mengenal-lebih-dalam-tentang-planet" :point="100" :items="$items"
+                                    materi="menjelajahi-sistem-tata-surya" :point="100" :items="$items"
                                     :correctOrder="$correctOrder" />
                             </div>
 
@@ -158,7 +158,7 @@
 
                     @endphp
                     <div class="card card-body">
-                        <x-quiz title="Kuis" materi="planet-sebagai-anggota-tata-surya" :point="100" :questions="$questions" />
+                        <x-quiz title="latihan-2" materi="menjelajahi-sistem-tata-surya" :point="100" :questions="$questions" />
                     </div>
                 </section>
 

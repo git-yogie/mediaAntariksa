@@ -85,8 +85,6 @@
                 const wrongSelected = userAnswers.filter(answer => !correctAnswers.includes(answer))
                     .length;
 
-
-
                 // Count the total selected answers
                 const totalSelected = userAnswers.length;
 

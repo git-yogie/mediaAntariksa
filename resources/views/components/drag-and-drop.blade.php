@@ -13,6 +13,45 @@
             d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
     </symbol>
 </svg>
+<style>
+    .drop-zone {
+        border: 2px dashed #999;
+        border-radius: 6px;
+        position: relative;
+        min-height: 150px;
+        transition: border-color 0.3s ease;
+        /* supaya hint bisa posisinya pas */
+        display: flex;
+        flex-wrap: wrap;
+        align-items: start;
+        padding: 0.5rem;
+    }
+
+    .drop-zone.dragover {
+        border-color: #007bff;
+        /* highlight saat dragover */
+        background-color: #e9f5ff;
+    }
+
+    .drop-hint {
+        font-size: 0.9rem;
+        color: #999;
+        user-select: none;
+        pointer-events: none;
+        width: 100%;
+        text-align: center;
+        padding: 1rem 0;
+        border: 2px dashed #ccc;
+        border-radius: 6px;
+        margin-bottom: 0.5rem;
+    }
+
+    /* sembunyikan hint kalau sudah ada item di drop zone */
+    .drop-zone:not(:empty) .drop-hint {
+        display: none;
+    }
+</style>
+
 <div class="card card-body my-1">
     <h2 class="text-center mb-4">Mengkategorikan</h2>
     <div class="alert alert-success" role="alert">
@@ -33,7 +72,7 @@
                         <div class="item d-flex align-items-center mb-2 p-2 bg-light border rounded" draggable="true"
                             data-name="{{ $item['name'] }}">
                             <img src="{{ asset('images/' . $item['img']) }}" alt="{{ $item['img'] }}" class="me-2"
-                                style="width: 50px;">
+                                style="min-height:500px;width: 50px;">
                             <span>{{ $item['name'] }}</span>
                         </div>
                     @endforeach
@@ -47,17 +86,19 @@
                 @foreach ($categories as $category)
                     <div class="col-12 mb-4">
                         <div class="card h-100 category" data-category="{{ $category['key'] }}"
-                            style="min-height: 200px;">
+                            style="min-height: 500px;">
                             <div class="card-header bg-secondary text-white text-center">
                                 <h5 class="mb-0">{{ $category['label'] }}</h5>
                             </div>
                             <div class="card-body drop-zone d-flex flex-wrap align-items-start"
                                 style="min-height: 150px;">
+                                <div class="drop-hint">Tarik atau seret item ke sini</div>
                                 <!-- Item yang diseret akan ditempatkan di sini -->
                             </div>
                         </div>
                     </div>
                 @endforeach
+
             </div>
         </div>
     </div>
@@ -134,27 +175,38 @@
                 const name = e.dataTransfer.getData('text/plain');
                 const category = e.currentTarget.parentElement.getAttribute('data-category');
 
-                // Cari item yang sedang diseret
                 const item = document.querySelector(`.item[data-name="${name}"]`);
                 if (item) {
-                    // Hapus kelas opacity
                     item.classList.remove('opacity-50');
-                    // Pindahkan item ke drop zone
                     e.currentTarget.appendChild(item);
-                    // Simpan jawaban pengguna
                     userAnswers[name] = category;
-                }
 
+                    // sembunyikan hint karena ada item
+                    const hint = e.currentTarget.querySelector('.drop-hint');
+                    if (hint) hint.style.display = 'none';
+                }
                 e.currentTarget.classList.remove('bg-info');
             }
 
             function dragEnter(e) {
                 e.preventDefault();
-                e.currentTarget.parentElement.classList.add('bg-info', 'bg-opacity-25');
+                e.preventDefault();
+                const dropZone = e.currentTarget;
+                dropZone.parentElement.classList.add('bg-info', 'bg-opacity-25');
+                // sembunyikan hint saat drag enter
+                const hint = dropZone.querySelector('.drop-hint');
+                if (hint) hint.style.display = 'none';
+
             }
 
             function dragLeave(e) {
-                e.currentTarget.parentElement.classList.remove('bg-info', 'bg-opacity-25');
+                const dropZone = e.currentTarget;
+                dropZone.parentElement.classList.remove('bg-info', 'bg-opacity-25');
+                // tampilkan hint kalau drop zone kosong
+                const hint = dropZone.querySelector('.drop-hint');
+                if (hint && dropZone.children.length === 1) { // hanya hint doang
+                    hint.style.display = 'block';
+                }
             }
 
             checkBtn.addEventListener('click', () => {

@@ -6,6 +6,8 @@
 
     // Fungsi untuk menampilkan konten berdasarkan halaman
     function renderContent(currentPage) {
+        // Perbarui hash URL
+        updateHash(currentPage);
         sections.forEach((section, index) => {
             // Tambahkan `d-none` pada section yang tidak aktif
             if (index + 1 === currentPage) {
@@ -75,6 +77,30 @@
     });
 
     // Inisialisasi halaman pertama
-    renderContent(1);
-    renderPagination(1);
+    function getPageFromHash() {
+        const hash = window.location.hash;
+        if (hash.length > 1) {
+            const num = parseInt(hash.substring(1), 10);
+            if (!isNaN(num) && num >= 1 && num <= totalPages) {
+                return num;
+            }
+        }
+        return 1;
+    }
+
+    function updateHash(page) {
+        history.replaceState(null, '', `#${page}`);
+    }
+
+    window.addEventListener('hashchange', () => {
+        const newPage = getPageFromHash();
+        renderAll(newPage);
+    });
+
+    function renderAll(currentPage = 1) {
+        renderContent(currentPage);
+        renderPagination(currentPage);
+    }
+
+    renderAll(getPageFromHash());
 </script>

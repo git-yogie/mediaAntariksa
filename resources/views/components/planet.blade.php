@@ -52,7 +52,7 @@
 
             function animate() {
                 requestAnimationFrame(animate);
-                earth.rotation.y += 0.005;
+                earth.rotation.y += 0.0001;
                 controls.update();
                 renderer.render(scene, camera);
             }

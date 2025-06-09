@@ -1,15 +1,16 @@
 <?php
 
-use App\Livewire\Auth\LoginForm;
-use App\Livewire\Auth\RegisterForm;
 use App\Livewire\Guru\Users;
+use App\Livewire\Auth\LoginForm;
+use App\Livewire\Guru\Dashboard;
+use App\Livewire\Auth\RegisterForm;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\QuizController;
 use App\Http\Controllers\MateriController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\WelcomePageController;
 use App\Http\Controllers\LearningProgressController;
-use App\Livewire\Guru\Dashboard;
 
 
 Route::controller(WelcomePageController::class)->group(function () {
@@ -41,7 +42,7 @@ Route::middleware(['auth'])->group(function () {
     });
     Route::get("/auth/logout", [AuthController::class, "Logout"])->name("auth.logout");
     Route::put("/auth/update", [AuthController::class, "updateUser"])->name("auth.updateProfile");
-    Route::get("/dashboard", [AuthController::class, "dashboard"])->name("dashboard");
+    Route::get("/dashboard", [DashboardController::class,'index'])->name("dashboard");
 
 });
 
@@ -56,11 +57,12 @@ Route::controller(LearningProgressController::class)->group(function () {
 
 // Route::get("/guru/dashboard",Dashboard::class)->name("guru.dashboard");
 
-Route::middleware(['auth','guru'])->group(function(){
-    Route::get("/guru/users",Users::class)->name("guru.user");
+Route::middleware(['auth', 'guru'])->group(function () {
+    Route::get("/guru/dashboard", Dashboard::class)->name("guru.dashboard");
+    Route::get("/guru/users", Users::class)->name("guru.user");
     Route::get("/guru/users/form", \App\Livewire\Guru\Users\Form::class)->name("guru.user.form");
     Route::get("/guru/users/form/{id}", \App\Livewire\Guru\Users\Form::class)->name("guru.user.edit");
-    Route::get("/guru/nilai",\App\Livewire\Guru\Users\Nilai::class)->name("guru.nilai");
+    Route::get("/guru/nilai", \App\Livewire\Guru\Users\Nilai::class)->name("guru.nilai");
 });
 
 

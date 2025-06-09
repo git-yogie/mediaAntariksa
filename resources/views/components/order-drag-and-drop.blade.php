@@ -36,7 +36,12 @@
                     <h5 class="mb-0">Urutan Anda</h5>
                 </div>
                 <div class="card-body" id="user-order">
-                    <!-- Item yang diurutkan akan ditempatkan di sini -->
+                    <!-- Placeholder text when empty -->
+                    <div id="drop-zone-placeholder" class="text-center py-5 border-3 border-dashed rounded"
+                        style="border-color: #6c757d;">
+                        <i class="bi bi-arrow-down-circle fs-1 text-muted"></i>
+                        <p class="mt-2 text-muted">Tarik item kesini</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -49,110 +54,108 @@
     </div>
 
     <!-- JavaScript untuk Drag and Drop dan Validasi -->
+    <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const sortableList = document.getElementById('sortable-list');
             const userOrder = document.getElementById('user-order');
             const checkBtn = document.querySelector('.check-btn');
             const resetBtn = document.querySelector('.reset-btn');
+            const dropZonePlaceholder = document.getElementById('drop-zone-placeholder');
 
-            // Parsing urutan yang benar dari PHP ke JavaScript
             const correctOrder = @json($correctOrder);
 
+            let point = {{ $point }};
+            let title = `{{ $title }}`;
+            let materi = `{{ $materi }}`;
+
+            // Inisialisasi Sortable untuk dua container
             let userAnswers = [];
-            const point = {{ $point }}
-            const title = `{{ $title }}`
-            const materi = `{{ $materi }}`
 
-            // Event Listeners untuk Drag and Drop
-            sortableList.addEventListener('dragstart', (e) => {
-                if (e.target && e.target.matches('.list-group-item')) {
-                    e.dataTransfer.setData('text/plain', e.target.getAttribute('data-name'));
-                    e.target.classList.add('opacity-50');
+            function updateDropZone() {
+                if (userOrder.querySelectorAll('.list-group-item').length > 0) {
+                    dropZonePlaceholder.style.display = 'none';
+                    userOrder.classList.remove('border-dashed');
+                    userOrder.classList.add('border-solid');
+                } else {
+                    dropZonePlaceholder.style.display = 'block';
+                    userOrder.classList.add('border-dashed');
+                    userOrder.classList.remove('border-solid');
+                }
+            }
+
+            // Sortable untuk item list kiri (source)
+            Sortable.create(sortableList, {
+                group: {
+                    name: 'shared',
+                    put: ['userOrder'], // Bisa masuk ke list kiri dari kanan (userOrder)
+                    pull: 'clone' // biar itemnya bisa disalin, tapi kita nanti custom
+                },
+                animation: 150,
+                sort: false, // supaya user gak bisa reorder di list kiri
+                onAdd: function(evt) {
+                    // Kalau item dipindah balik ke list kiri, hapus dari userOrder
+                    // Tapi kita pakai 'clone' jadi gak perlu hapus, ini untuk safety
+                    updateDropZone();
                 }
             });
 
-            sortableList.addEventListener('dragend', (e) => {
-                if (e.target && e.target.matches('.list-group-item')) {
-                    e.target.classList.remove('opacity-50');
-                }
-            });
+            // Sortable untuk urutan user di kanan (target)
+            Sortable.create(userOrder, {
+                group: {
+                    name: 'shared',
+                    put: true,
+                    pull: true
+                },
+                animation: 150,
+                onAdd: function(evt) {
+                    // Hapus elemen clone asli dari list kiri agar item 'dipindah', bukan disalin
+                    const item = evt.item;
+                    const itemName = item.getAttribute('data-name');
 
-            userOrder.addEventListener('dragover', (e) => {
-                e.preventDefault();
-            });
-
-            userOrder.addEventListener('drop', (e) => {
-                e.preventDefault();
-                const itemName = e.dataTransfer.getData('text/plain');
-                const existingItem = userOrder.querySelector(`[data-name="${itemName}"]`);
-
-                if (!existingItem) {
-                    const item = sortableList.querySelector(`[data-name="${itemName}"]`);
-                    if (item) {
-                        sortableList.removeChild(item);
-                        userOrder.appendChild(item);
-                        userAnswers.push(itemName);
+                    // Remove original dari list kiri (kecuali kalau itu clone)
+                    const original = sortableList.querySelector(`[data-name="${itemName}"]`);
+                    if (original) {
+                        original.remove();
                     }
+
+                    updateUserAnswers();
+                    updateDropZone();
+                },
+                onRemove: function(evt) {
+                    updateUserAnswers();
+                    updateDropZone();
+                },
+                onUpdate: function(evt) {
+                    updateUserAnswers();
                 }
             });
 
-            userOrder.addEventListener('dragstart', (e) => {
-                if (e.target && e.target.matches('.list-group-item')) {
-                    e.dataTransfer.setData('text/plain', e.target.getAttribute('data-name'));
-                    e.target.classList.add('opacity-50');
-                }
-            });
-
-            userOrder.addEventListener('dragend', (e) => {
-                if (e.target && e.target.matches('.list-group-item')) {
-                    e.target.classList.remove('opacity-50');
-                }
-            });
-
-            sortableList.addEventListener('dragover', (e) => {
-                e.preventDefault();
-            });
-
-            sortableList.addEventListener('drop', (e) => {
-                e.preventDefault();
-                const itemName = e.dataTransfer.getData('text/plain');
-                const existingItem = sortableList.querySelector(`[data-name="${itemName}"]`);
-
-                if (!existingItem) {
-                    const item = userOrder.querySelector(`[data-name="${itemName}"]`);
-                    if (item) {
-                        userOrder.removeChild(item);
-                        sortableList.appendChild(item);
-                        const index = userAnswers.indexOf(itemName);
-                        if (index > -1) {
-                            userAnswers.splice(index, 1);
-                        }
-                    }
-                }
-            });
+            // Update userAnswers dari urutan DOM di userOrder
+            function updateUserAnswers() {
+                userAnswers = Array.from(userOrder.querySelectorAll('.list-group-item')).map(el => el.getAttribute(
+                    'data-name'));
+            }
 
             // Tombol Periksa Jawaban
             checkBtn.addEventListener('click', () => {
-                const userOrderItems = Array.from(userOrder.children).map(item => item.getAttribute(
-                    'data-name'));
+                updateUserAnswers();
 
+                const userOrderItems = userAnswers;
                 let score = 0;
                 const totalItems = correctOrder.length;
                 let isCorrect = true;
                 for (let i = 0; i < correctOrder.length; i++) {
-                    if (userOrderItems[i] == correctOrder[i]) {
+                    if (userOrderItems[i] === correctOrder[i]) {
                         score += 1;
                     } else {
                         isCorrect = false;
                     }
                 }
 
-
-
                 const point = Math.round((score / totalItems) * 100);
                 console.log(userOrderItems, score, totalItems, isCorrect, point);
-                setProgress(materi, title, point)
+                setProgress(materi, title, point);
 
                 if (isCorrect && userOrderItems.length === correctOrder.length) {
                     Swal.fire({
@@ -172,14 +175,36 @@
 
             // Tombol Reset
             resetBtn.addEventListener('click', () => {
-                // Pindahkan semua item kembali ke sortableList
-                const itemsToReset = Array.from(userOrder.children);
-                itemsToReset.forEach(item => {
+                // Reset userOrder ke kosong, dan pindahkan semua item ke sortableList
+                userOrder.querySelectorAll('.list-group-item').forEach(item => {
                     userOrder.removeChild(item);
                     sortableList.appendChild(item);
                 });
                 userAnswers = [];
+                updateDropZone();
             });
+
+            // Init UI
+            updateDropZone();
         });
     </script>
+
+    <style>
+        .border-dashed {
+            border-style: dashed !important;
+        }
+
+        .border-solid {
+            border-style: solid !important;
+        }
+
+        #user-order {
+            min-height: 200px;
+            transition: all 0.3s ease;
+        }
+
+        #drop-zone-placeholder {
+            transition: all 0.3s ease;
+        }
+    </style>
 </div>

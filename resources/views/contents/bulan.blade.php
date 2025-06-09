@@ -56,13 +56,28 @@
                         <div class="alert alert-primary alert-dismissible fade show" role="alert">
                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 
-                            <strong>Cermati bentuk Bulan berikut</strong> kamu bisa berinteraksi dengan klik kanan pada mouse
+                            <strong>Cermati bentuk Bulan berikut</strong> kamu bisa berinteraksi dengan klik kanan pada
+                            mouse
                             untuk putar, klik kiri untuk menggeser, dan scroll untuk zoom
                         </div>
 
                         <x-Planet width="100%" height="500px" id="planet-1"
                             texture="{{ asset('textures/moon-texture.jpg') }}" />
 
+                    </div>
+                    <div class="card card-body my-5 shadow-sm">
+                        <h5 class="mb-3">🌕 Fase Bulan Interaktif</h5>
+                        <div class="alert alert-info">
+                            Geser slider dengan klik dan tahan bulatan biru dibawah untuk melihat fase Bulan dari Bulan Baru
+                            (hari ke-0) hingga Bulan
+                            Purnama (hari ke-15) dan kembali ke Bulan Baru (hari ke-29).
+                        </div>
+                        <input type="range" min="0" max="29" value="0" class="form-range"
+                            id="moonSlider" oninput="updateMoonPhase(this.value)">
+                        <div class="text-center mt-3">
+                            <div id="moonEmoji" style="font-size: 4rem;">🌑</div>
+                            <p id="moonPhaseDesc" class="mt-2">Hari ke-0: Bulan Baru</p>
+                        </div>
                     </div>
                 </section>
                 <nav>
@@ -81,4 +96,53 @@
 
 
 @push('scripts')
+    <script>
+        let isPointed = false;
+
+        function updateMoonPhase(day) {
+            let emoji = "🌑";
+            let desc = `Hari ke-${day}: `;
+            let impact = "";
+
+            if (day == 0 || day == 29) {
+                if (day == 29) {
+                    if (!isPointed) {
+                        setProgress('menjelajah-matahari-bumi-dan-bulan', 'latihan-4', 10)
+                        isPointed = true;
+                    }
+                }
+                emoji = "🌑";
+                desc += "Bulan Baru";
+                impact = "Pasang surut minimum. Malam gelap gulita — cocok buat lihat bintang! 🌌";
+                Swal.fire("Bulan Baru 🌑", impact, "info");
+            } else if (day == 7) {
+                emoji = "🌓";
+                desc += "Kuartal Pertama";
+                impact = "Pasang sedang. Bulan tampak setengah dari sisi kanan.";
+                Swal.fire("Kuartal Pertama 🌓", impact, "info");
+            } else if (day == 15) {
+                emoji = "🌕";
+                desc += "Bulan Purnama";
+                impact = "Pasang surut maksimum (pasang tinggi + surut dalam). Malam sangat terang. 🌕";
+                Swal.fire("Bulan Purnama 🌕", impact, "success");
+            } else if (day == 22) {
+                emoji = "🌗";
+                desc += "Kuartal Ketiga";
+                impact = "Pasang kembali ke normal. Bulan tampak setengah dari sisi kiri.";
+                Swal.fire("Kuartal Ketiga 🌗", impact, "info");
+            } else if (day < 15) {
+                emoji = "🌒";
+                desc += "Menuju Purnama (waxing)";
+                impact = "Cahaya malam makin terang. Pasang makin tinggi.";
+            } else {
+                emoji = "🌘";
+                desc += "Menuju Bulan Baru (waning)";
+                impact = "Cahaya malam makin redup. Pasang surut berkurang.";
+
+            }
+
+            document.getElementById("moonEmoji").innerText = emoji;
+            document.getElementById("moonPhaseDesc").innerText = desc + " – " + impact;
+        }
+    </script>
 @endpush

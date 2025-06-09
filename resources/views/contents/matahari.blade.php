@@ -121,8 +121,7 @@
 
                     @endphp
                     <div class="card card-body">
-                        <x-quiz title="Kuis" materi="matahari" :point="100"
-                        :questions="$questions" />
+                        <x-quiz title="latihan-5" materi="menjelajah-matahari-bumi-dan-bulan" :point="100" :questions="$questions" />
                     </div>
                 </section>
                 <nav>
@@ -141,4 +140,54 @@
 
 
 @push('scripts')
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+    <script>
+        const map = L.map('map').setView([0, 0], 2); // Tampilkan seluruh dunia
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: 'Peta oleh OpenStreetMap',
+        }).addTo(map);
+
+        map.on('click', async (e) => {
+            const {
+                lat,
+                lng
+            } = e.latlng;
+            const popup = L.popup().setLatLng([lat, lng]).setContent('Loading...').openOn(map);
+
+            try {
+                // Reverse geocoding (dapatkan nama lokasi)
+                const geoRes = await fetch(
+                    `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}`);
+                const geoData = await geoRes.json();
+                const lokasi = geoData.display_name || 'Lokasi tidak dikenal';
+
+                // Waktu lokal
+                const timeRes = await fetch(`https://worldtimeapi.org/api/timezone/Etc/GMT`);
+                const timeData = await timeRes.json();
+                const waktu = new Date(timeData.datetime).toLocaleTimeString();
+
+                // Sunrise/sunset info
+                const sunRes = await fetch(
+                    `https://api.sunrise-sunset.org/json?lat=${lat}&lng=${lng}&formatted=0`);
+                const sunData = await sunRes.json();
+                const sunrise = new Date(sunData.results.sunrise);
+                const sunset = new Date(sunData.results.sunset);
+                const now = new Date();
+
+                const status = now >= sunrise && now <= sunset ? '🌞 Siang' : '🌙 Malam';
+
+                popup.setContent(`
+              <b>${lokasi}</b><br>
+              🕒 Waktu lokal: ${waktu}<br>
+              ${status}
+            `);
+            } catch (err) {
+                popup.setContent('Gagal mengambil data 😢');
+                console.error(err);
+            }
+        });
+    </script>
 @endpush

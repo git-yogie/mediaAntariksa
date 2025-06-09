@@ -25,19 +25,19 @@ class QuizController extends Controller
     public function __construct()
     {
         $this->quizInfo = [
-            "latihan-1" => [
+            "kuis-1" => [
                 "title" => "Kuis 1",
                 "materi"=>"Menjelajah Bumi dan Antariksa",
                 "type" => "Kuis",
                 "question" => Latihan_1::$question,
             ],
-            "latihan-2" => [
+            "kuis-2" => [
                 "title" => "Kuis 2",
                 "materi"=>"Dampak Rotasi dan Revolusi Bumi",
                 "type" => "Kuis",
                 "question" => Latihan_2::$question,
             ],
-            "latihan-3" => [
+            "kuis-3" => [
                 "title" => "Kuis 3",
                 "materi"=>"Menjelajah Bumi dan Antariksa",
                 "type" => "Kuis",
@@ -78,6 +78,8 @@ class QuizController extends Controller
         $materi = $param;
         $info = $this->quizInfo[$param];
         $title = $this->quizInfo[$param]["title"];
+
+
 
         // shuffle($soalQuiz);
 

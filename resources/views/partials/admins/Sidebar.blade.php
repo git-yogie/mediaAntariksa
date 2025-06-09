@@ -8,12 +8,12 @@
         </div>
         <div class="navbar-content">
             <ul class="pc-navbar">
-                {{-- <li class="pc-item">
+                <li class="pc-item">
                     <a href="{{ route('guru.dashboard') }}" class="pc-link">
                         <span class="pc-micon"><i class="ti ti-dashboard"></i></span>
                         <span class="pc-mtext">Dashboard</span>
                     </a>
-                </li> --}}
+                </li>
                 <li class="pc-item">
                     <a href="{{ route('guru.user') }}" class="pc-link d-flex">
                         <span class="pc-micon"><i class="fas fa-rocket"></i></span>
