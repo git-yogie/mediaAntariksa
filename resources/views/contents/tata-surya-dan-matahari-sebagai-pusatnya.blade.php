@@ -231,7 +231,7 @@
     </div>
     @include('scripts.content-scripts', [
         'nextLink' => route('materi', 'planet-sebagai-anggota-tata-surya'),
-        'prevLink' => route('quiz.prepare', 'latihan-2'),
+        'prevLink' => route('quiz.prepare', 'kuis-2'),
     ])
 @endsection
 

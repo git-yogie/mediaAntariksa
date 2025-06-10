@@ -133,7 +133,7 @@
         </div>
     </div>
     @include('scripts.content-scripts', [
-        'nextLink' => route('quiz.prepare', 'latihan-1'),
+        'nextLink' => route('quiz.prepare', 'kuis-1'),
         'prevLink' => route('materi', 'bumi-bulan-dan-matahari'),
     ])
 @endsection
