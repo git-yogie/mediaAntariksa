@@ -8,7 +8,7 @@ use App\Models\User;
 class Nilai extends Component
 {
     public $users;
-    public $materi = "latihan-1";
+    public $materi = "kuis-1";
     public $search = '';
 
     // Statistik keseluruhan

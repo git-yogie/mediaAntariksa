@@ -33,9 +33,9 @@
                     <div class="col-md-4">
                         <div class="search-input mb-10">
                             <select wire:model="materi" class="form-control form-select h6 rounded-4 mb-0 py-10 px-8">
-                                <option value="latihan-1" selected>Kuis Menjelajahi Bumi, Matahari, dan Bulan</option>
-                                <option value="latihan-2">Kuis Dampak Revolusi dan Rotasi Bumi</option>
-                                <option value="latihan-3">Kuis Menjelajahi Tata Surya</option>
+                                <option value="kuis-1" selected>Kuis Menjelajahi Bumi, Matahari, dan Bulan</option>
+                                <option value="kuis-2">Kuis Dampak Revolusi dan Rotasi Bumi</option>
+                                <option value="kuis-3">Kuis Menjelajahi Tata Surya</option>
                                 <option value="evaluasi">Evaluasi</option>
                             </select>
                         </div>
