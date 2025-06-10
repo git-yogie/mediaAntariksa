@@ -19,7 +19,7 @@
 <nav class="pc-sidebar">
     <div class="navbar-wrapper">
         <div class="m-header">
-            <a href="../dashboard/index.html" class="b-brand text-primary">
+            <a href="{{ route('welcome.index') }}" class="b-brand text-primary">
                 <!-- ========   Change your logo from here   ============ -->
                 <h3>Media Antariksa</h3>
             </a>

@@ -139,7 +139,7 @@
                                                                 <div class="item mx-2" style="width:160px" data-merge="1">
                                                                     <div class="card card-body text-center">
                                                                         <img src="{{ asset('badges/' . $value['badge']) }}"
-                                                                            alt="" class="img-fluid "
+                                                                            alt="" class="img-fluid rounded-circle"
                                                                             {{ $value['get'] ? '' : 'style=filter:grayscale(100%);' }}>
                                                                         <strong>{{ $key }}</strong>
                                                                         @if (!$value['get'])
@@ -171,7 +171,7 @@
                                                             <div class="item mx-2" style="width:160px" data-merge="1">
                                                                 <div class="card card-body text-center">
                                                                     <img src="{{ asset('badges/6.png') }}" alt=""
-                                                                        class="img-fluid">
+                                                                        class="img-fluid rounded-circle">
                                                                     <strong>Peringkat 1</strong>
                                                                     <h6 class='bx bx-check-circle text-success badge-done'>
                                                                         {{ ucwords('Tak terkalahkan') }}</h6> (di peroleh)
@@ -331,7 +331,7 @@
                                 <!-- Kartu untuk menampilkan informasi lencana -->
                                 <div class="card card-body text-center">
                                     <img src="{{ asset('badges/' . $value['badge']) }}" alt=""
-                                        class="img-fluid " {{ $value['get'] ? '' : 'style=filter:grayscale(100%);' }}>
+                                        class="img-fluid rounded-circle" {{ $value['get'] ? '' : 'style=filter:grayscale(100%);' }}>
                                     <!-- Gambar lencana -->
                                     <strong>{{ $key }}</strong> <!-- Nama lencana -->
                                     @if (!$value['get'])
@@ -363,7 +363,7 @@
                     @if ($rank = 1)
                         <div class="item mx-2" style="width:160px" data-merge="1">
                             <div class="card card-body text-center">
-                                <img src="{{ asset('badges/6.png') }}" alt="" class="img-fluid">
+                                <img src="{{ asset('badges/6.png') }}" alt="" class="img-fluid rounded-circle">
                                 <strong>Peringkat 1</strong>
                                 <h6 class='bx bx-check-circle text-success badge-done'>
                                     {{ ucwords('Tak terkalahkan') }}</h6> (di peroleh)

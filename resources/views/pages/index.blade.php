@@ -75,7 +75,7 @@
         <nav class="navbar navbar-expand-md navbar-dark top-nav-collapse default">
             <div class="container">
                 <a class="navbar-brand" href="#">
-                    ENS
+                    Media Antariksa
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false"
@@ -94,8 +94,8 @@
                         @endauth
 
                         @if (Auth::user() == null)
-                            <li class="nav-item pe-1">
-                                <a class="nav-link" href="{{ route('login') }}">Masuk</a>
+                            <li class="nav-item pe-1 me-2">
+                                <a class=" btn btn-primary" href="{{ route('login') }}">Masuk</a>
                             </li>
                             <li class="nav-item">
                                 <a class="btn btn-primary" target="_blank"
@@ -130,12 +130,12 @@
                             <span class="text-primary">Selamat Datang Di</span>
                         @endauth
                         <br>
-                        di <span class="text-primary"> Media Pembelajaran</span> Menjelajah Bumi Dan Antariksa
+                        <span class="text-primary">di Media Pembelajaran Menjelajah Bumi Dan Antariksa</span>
                     </h1>
                     <h5 class="mb-4 text-white opacity-75 wow fadeInUp" data-wow-delay="0.4s">Jelajahi bumi dan
                         Antariksa, pahami bagaimana tata surya bekerja dan dampaknya bagi kehidupan kita!</h5>
                     <div class="my-5 wow fadeInUp" data-wow-delay="0.6s">
-                        <button data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-outline-primary me-2">Lihat
+                        <button data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-primary me-2">Lihat
                             CPP</button>
                         <a href="{{ route("materi","menjelajahi-bumi-dan-antariksa") }}" class="btn btn-primary"> <i
                                 class="ti ti-eye me-1"></i> Mulai Belajar!</a>
