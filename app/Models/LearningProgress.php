@@ -11,13 +11,13 @@ class LearningProgress extends Model
     public function set_progress(Request $request)
     {
         $data = $request->all();
-        $progress = learningProgress::where('user_id', Auth::User()->id)
+        $progress = LearningProgress::where('user_id', Auth::User()->id)
             ->where("materi", $data["materi"])
             ->where("aktivitas", $data["activity"])
             ->first();
 
         if ($progress == null) {
-            $progress = new learningProgress();
+            $progress = new LearningProgress();
             $message = ["message" => "$progress->point Poin ditambahkan!"];
         } else {
             if ($progress->point == $data["point"]) {
@@ -42,7 +42,7 @@ class LearningProgress extends Model
 
     public function get_progress($materi)
     {
-        $progress = learningProgress::where("user_id", Auth::User()->id)
+        $progress = LearningProgress::where("user_id", Auth::User()->id)
             ->where("materi", $materi)->get()->map(
                 function ($item) {
                     $item->jawaban = json_decode($item->jawaban);
@@ -55,7 +55,7 @@ class LearningProgress extends Model
 
     public function countPoint()
     {
-        $point = learningProgress::where("user_id", Auth::User()->id)->sum("point");
+        $point = LearningProgress::where("user_id", Auth::User()->id)->sum("point");
         return response()->json(["point" => $point]);
     }
 }

@@ -50,21 +50,21 @@ class User extends Authenticatable
 
     public function learningProgress()
     {
-        return $this->hasMany(learningProgress::class);
+        return $this->hasMany(LearningProgress::class);
     }
 
     public function countPoint()
     {
-        return $this->hasMany(learningProgress::class)->sum('point');
+        return $this->hasMany(LearningProgress::class)->sum('point');
     }
 
     public function evaluasi()
     {
-        return $this->hasMany(quiz::class, "user_id");
+        return $this->hasMany(Quiz::class, "user_id");
     }
 
     public function quizzes()
     {
-        return $this->hasMany(quiz::class, "user_id");
+        return $this->hasMany(Quiz::class, "user_id");
     }
 }
