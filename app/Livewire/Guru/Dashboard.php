@@ -2,7 +2,7 @@
 
 namespace App\Livewire\Guru;
 
-use App\Models\quiz;
+use App\Models\Quiz;
 use App\Models\User;
 use Livewire\Component;
 use Illuminate\Support\Facades\DB;
@@ -22,19 +22,19 @@ class Dashboard extends Component
     public function mount()
     {
         $this->countSiswa = User::where("role", "siswa")->count();
-        $this->countLulus = quiz::where("materi", "evaluasi")
+        $this->countLulus = Quiz::where("materi", "evaluasi")
             ->where("status", "lulus")->count();
-        $this->countTidakLulus = quiz::where("materi", "evaluasi")
+        $this->countTidakLulus = Quiz::where("materi", "evaluasi")
             ->where("status", "tidak lulus")->count();
-        $this->averageEval = quiz::where("materi", "evaluasi")
+        $this->averageEval = Quiz::where("materi", "evaluasi")
             ->avg("nilai");
-        $this->mengerjakanEvaluasi = quiz::where("materi", "evaluasi")->count();
+        $this->mengerjakanEvaluasi = Quiz::where("materi", "evaluasi")->count();
 
         $this->durasiMengerjakan = DB::table('quizzes')
             ->select(DB::raw('AVG(TIMESTAMPDIFF(SECOND, waktu_mulai, waktu_selesai)) as avg_seconds'))
             ->value('avg_seconds');
 
-        $this->topUsers = quiz::with('user')->where('materi', 'latihan-3')
+        $this->topUsers = Quiz::with('user')->where('materi', 'latihan-3')
             ->orderBy('nilai', 'desc')
             ->take(5)->get();
 
