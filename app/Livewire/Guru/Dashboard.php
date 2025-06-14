@@ -18,6 +18,7 @@ class Dashboard extends Component
 
     public $topUsers;
 
+    public $rataKelas;
     public $distribusiNilai;
     public function mount()
     {
@@ -40,12 +41,18 @@ class Dashboard extends Component
 
 
         $this->distribusiNilai = [
-            'tidak_lulus' => Quiz::where('status', 'tidak lulus')->count(),
-            'dibawah_70' => Quiz::where('nilai', '<', 70)->where('status', 'lulus')->count(),
-            '70_80' => Quiz::whereBetween('nilai', [70, 80])->where('status', 'lulus')->count(),
-            '80_90' => Quiz::whereBetween('nilai', [80, 90])->where('status', 'lulus')->count(),
-            '90_100' => Quiz::whereBetween('nilai', [90, 100])->where('status', 'lulus')->count(),
+            'tidak lulus' => Quiz::where('status', 'tidak lulus')->count(),
+            'dibawah dari 70' => Quiz::where('nilai', '<', 70)->where('status', 'lulus')->count(),
+            '70-80' => Quiz::whereBetween('nilai', [70, 80])->where('status', 'lulus')->count(),
+            '80-90' => Quiz::whereBetween('nilai', [80, 90])->where('status', 'lulus')->count(),
+            '90-100' => Quiz::whereBetween('nilai', [90, 100])->where('status', 'lulus')->count(),
         ];
+
+        $this->rataKelas = DB::table('quizzes')
+            ->join('users', 'quizzes.user_id', '=', 'users.id')
+            ->select('users.kelas', DB::raw('AVG(quizzes.nilai) as rata_rata'))
+            ->groupBy('users.kelas')
+            ->get();
     }
 
     public function render()

@@ -15,6 +15,12 @@
                     </a>
                 </li>
                 <li class="pc-item">
+                    <a href="{{ route('guru.siswa') }}" class="pc-link d-flex">
+                        <span class="pc-micon"><i class="fas fa-user-graduate"></i></span>
+                        <span class="pc-mtext">Siswa</span>
+                    </a>
+                </li>
+                <li class="pc-item">
                     <a href="{{ route('guru.user') }}" class="pc-link d-flex">
                         <span class="pc-micon"><i class="fas fa-rocket"></i></span>
                         <span class="pc-mtext">Pengguna</span>

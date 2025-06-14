@@ -9,7 +9,7 @@
                             <h5 class="m-b-10">Guru</h5>
                         </div>
                         <ul class="breadcrumb">
-                            <li class="breadcrumb-item" aria-current="page">Pengguna</li>
+                            <li class="breadcrumb-item" aria-current="page">Siswa</li>
                         </ul>
                     </div>
                 </div>
@@ -17,15 +17,11 @@
         </div>
         <div class="card card-body mb-10">
             <div class="row">
-                <div class="col-md-2">
-                    <a href="{{ route('guru.user.form') }}" wire:navigate class="btn btn-primary mb-10">Buat
-                        Pengguna</a>
-                </div>
-                <div class="col-md-6">
+                <div class="col-md-11">
                     <div class="position-relative mb-10">
                         <input type="text" wire:model="search"
                             class="text-counter placeholder-13 form-control py-11 pe-76" maxlength="100"
-                            id="courseTitle" placeholder="Cari Pengguna....">
+                            id="courseTitle" placeholder="Cari siwa, berdasarkan : nama dan nis">
                     </div>
                 </div>
                 <div class="col-md-1">
@@ -42,6 +38,7 @@
 
         </div>
         <div class="card card-body">
+            <h2 class="card-title mb-3">Progress Belajar Siswa</h2>
             <div class="table-responsive">
                 <table id="assignmentTable" class="table table-striped">
                     <thead>
@@ -50,13 +47,13 @@
                                 #
                             </th>
                             <th class="h6 text-gray-300">Nama</th>
-                            <th class="h6 text-gray-300">Email</th>
-                            <th class="h6 text-gray-300">Identitas</th>
-                            <th class="h6 text-gray-300">Tgl Dibuat</th>
+                            <th class="h6 text-gray-300">Nis</th>
+                            <th class="h6 text-gray-300">Point</th>
+                            <th class="h6 text-gray-300">Progress Belajar</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($users as $user)
+                        @foreach ($siswa as $user)
                             <tr>
                                 <td class="fixed-width">
                                     {{ $loop->index + 1 }}
@@ -67,34 +64,22 @@
                                     </div>
                                 </td>
                                 <td>
-                                    <span class="h6 mb-0 fw-medium text-gray-300">{{ $user->email }}</span>
-                                </td>
-                                <td>
                                     <span class="h6 mb-0 fw-medium text-gray-300">{{ $user->identity }}</span>
                                 </td>
                                 <td>
-                                    <span class="h6 mb-0 fw-medium text-gray-300">{{ $user->created_at }}</span>
+                                    <span
+                                        class="h6 mb-0 fw-medium text-gray-300">{{ $user->learningProgress->sum('point') }}</span>
                                 </td>
                                 <td>
-                                    @if ($user->role === 'guru')
-                                        <h2
-                                            class="badge text-bg-success h2">
-                                            <span class="ti ti-user"></span>
-                                            Guru
-                                        </h2>
-                                    @else
-                                        <h2
-                                            class="badge text-bg-info h2 ">
-                                            <span class="ti ti-school"></span>
-                                            Siswa
-                                        </h2>
-                                    @endif
-                                </td>
-                                <td>
-                                    <a  href="{{ route('guru.user.edit', $user->id) }}"
-                                        class="btn btn-info">
-                                        <i class="ti ti-edit"></i> Edit
-                                    </a>
+                                    @php
+                                        $percentage = floor((($user->learningProgress->count() + $user->evaluasi->count())/15) * 100)
+                                    @endphp
+                                    <div class="progress" style="height: 15px;" role="progressbar" aria-label="Example with label"
+                                        aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+                                        <div class="progress-bar" style="width: {{ $percentage }}%">{{ $percentage }}%</div>
+                                    </div>
+                                    <span class="mt-2 fw-bold text-primary">{{($user->learningProgress->count() + $user->evaluasi->count())  }}/15 - {{ $percentage }}%</span>
+
                                 </td>
                             </tr>
                         @endforeach

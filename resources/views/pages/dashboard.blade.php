@@ -246,7 +246,10 @@
                                                         @php
                                                             $no++;
                                                             $finished = floor(
-                                                                ($users->learningProgress->count() / $total) * 100,
+                                                                (($users->learningProgress->count() +
+                                                                    $users->evaluasi->count()) /
+                                                                    $total) *
+                                                                    100,
                                                             );
                                                         @endphp
                                                         <div class="progress mt-2" role="progressbar"
@@ -267,7 +270,7 @@
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <div class="card card-body">
+                            <div class="card card-body d-none">
                                 <h2 class="card-title">Kuis dan Evaluasi</h2>
                                 <div class="table-responsive">
                                     <table class="table table-striped">
@@ -295,6 +298,29 @@
                                     @endif
                                 </div>
 
+                            </div>
+
+                            <div class="card card-body">
+                                <h2 class="card-title">Statistik Pembelajaran</h2>
+                                @foreach ($list_materi as $key => $value)
+                                    <div class="card card-body rounded-5">
+                                        <div class="d-flex justify-content-between align-items-center ">
+                                            <p class="m-0 p-0">{{ $value['title'] }}</p>
+                                            @if ($value['model_kuis'] != 0)
+                                                <span class="badge text-bg-primary">Nilai Kuis :
+                                                    {{ $value['model_kuis'] }}</span>
+                                            @else
+                                                <span class="badge text-bg-secondary">Kuis Belum Dikerjakan</span>
+                                            @endif
+                                        </div>
+                                        <div class="mt-2">
+                                            <div class="progress" role="progressbar" aria-label="Basic example" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
+                                                <div class="progress-bar" style="width: {{ $value['percentage'] }}%;"></div>
+                                              </div>
+                                              <p class="mt-1 mb-0 fw-bold">{{ $value['percentage'] }}% - {{ $value['count'] }} / {{ $value['total'] }}</p>
+                                        </div>
+                                    </div>
+                                @endforeach
                             </div>
                         </div>
                     </div>
@@ -331,7 +357,8 @@
                                 <!-- Kartu untuk menampilkan informasi lencana -->
                                 <div class="card card-body text-center">
                                     <img src="{{ asset('badges/' . $value['badge']) }}" alt=""
-                                        class="img-fluid rounded-circle" {{ $value['get'] ? '' : 'style=filter:grayscale(100%);' }}>
+                                        class="img-fluid rounded-circle"
+                                        {{ $value['get'] ? '' : 'style=filter:grayscale(100%);' }}>
                                     <!-- Gambar lencana -->
                                     <strong>{{ $key }}</strong> <!-- Nama lencana -->
                                     @if (!$value['get'])

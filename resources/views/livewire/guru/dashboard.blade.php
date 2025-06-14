@@ -84,17 +84,32 @@
             </div>
 
         </div>
-        <div class="col-md-12 col-xl-6">
-            <div class="card">
-                <div class="card-header">
-                    <h5 class="card-title">📊 Distribusi Nilai Siswa</h5>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-xl-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title">📊 Distribusi Nilai Siswa</h5>
+                    </div>
+                    <div class="card-body">
+                        <canvas id="nilaiChart"></canvas>
+                    </div>
                 </div>
-                <div class="card-body">
-                    <canvas id="nilaiChart"></canvas>
+            </div>
+            <div class="col-md-6 col-xl-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title">📊 Nilai Tiap Kelas Siswa</h5>
+                    </div>
+                    <div class="card-body">
+                        <canvas id="chartKelas"></canvas>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+
 </div>
 
 
@@ -129,6 +144,30 @@
             options: {
                 scales: {
                     y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
+    <script>
+        const ctxs = document.getElementById('chartKelas');
+
+        const chart = new Chart(ctxs, {
+            type: 'bar',
+            data: {
+                labels: {!! json_encode($rataKelas->pluck('kelas')) !!},
+                datasets: [{
+                    label: 'Rata-rata Nilai',
+                    data: {!! json_encode($rataKelas->pluck('rata_rata')) !!},
+                    backgroundColor: 'rgba(54, 162, 235, 0.6)'
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        min: 0,
+                        max: 100,
                         beginAtZero: true
                     }
                 }
