@@ -86,6 +86,7 @@ class DashboardController extends Controller
             })
             ->pluck('id')
             ->search($loggedInUser->id) + 1;
+
         $total = 0;
         $progress = 0;
 
@@ -94,7 +95,7 @@ class DashboardController extends Controller
             $total += $value["total"];
         }
         $total+= 1;
-
+        
         $list_materi = $this->list_materi;
         $percentage = floor(($progress / $total) * 100);
 
@@ -112,7 +113,7 @@ class DashboardController extends Controller
 
         $nilai_kuis = Quiz::where("user_id", auth()->user()->id)->get();
 
-
+        // dd($percentage,$progress,$total);
 
         return view('pages.dashboard', compact('percentage', 'progress', 'total', 'list_materi', 'topUsers', 'rank', 'badge', 'point', 'countBadge', 'nilai_kuis'));
     }

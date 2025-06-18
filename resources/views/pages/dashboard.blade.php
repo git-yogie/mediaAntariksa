@@ -160,21 +160,24 @@
                                                                             </small>
                                                                         @else
                                                                             <h6
-                                                                                class='bx bx-check-circle text-success badge-done'>
-                                                                                {{ ucwords($key) }}</h6> (di peroleh)
+                                                                                class='bx bx-check-circle mt-2 text-success badge-done'>
+                                                                                {{ ucwords($key) }}</h6>
+                                                                                <span class="badge rounded-pill text-bg-success">Diperoleh</span>
                                                                         @endif
                                                                     </div>
                                                                 </div>
                                                             @endif
                                                         @endforeach
-                                                        @if ($rank = 1)
+
+                                                        @if ($rank == 1)
                                                             <div class="item mx-2" style="width:160px" data-merge="1">
                                                                 <div class="card card-body text-center">
                                                                     <img src="{{ asset('badges/6.png') }}" alt=""
                                                                         class="img-fluid rounded-circle">
                                                                     <strong>Peringkat 1</strong>
                                                                     <h6 class='bx bx-check-circle text-success badge-done'>
-                                                                        {{ ucwords('Tak terkalahkan') }}</h6> (di peroleh)
+                                                                        {{ ucwords('Tak terkalahkan') }}</h6>
+                                                                        <span class="badge rounded-pill text-bg-success">Diperoleh</span>
 
                                                                 </div>
                                                             </div>
@@ -381,19 +384,20 @@
                                     @else
                                         <!-- Jika lencana sudah diperoleh -->
                                         <h1 class='bx bx-check-circle text-success badge-done'></h1>
+                                         <span class="badge rounded-pill text-bg-success">Diperoleh</span>
                                         <!-- Ikon centang hijau -->
                                     @endif
                                 </div>
                     </div> <!-- Penutup div.item -->
                     @endif
                     @endforeach
-                    @if ($rank = 1)
+                    @if ($rank == 1)
                         <div class="item mx-2" style="width:160px" data-merge="1">
                             <div class="card card-body text-center">
                                 <img src="{{ asset('badges/6.png') }}" alt="" class="img-fluid rounded-circle">
-                                <strong>Peringkat 1</strong>
                                 <h6 class='bx bx-check-circle text-success badge-done'>
-                                    {{ ucwords('Tak terkalahkan') }}</h6> (di peroleh)
+                                    {{ ucwords('Tak terkalahkan') }}</h6>
+                                    <span class="badge rounded-pill text-bg-success">Diperoleh</span>
 
                             </div>
                         </div>

@@ -130,7 +130,7 @@
                     <i class="ti ti-news"></i>
                 </li>
                 <li class="pc-item">
-                    <a href="#" class="pc-link d-flex {{ isReady('kuis-3') ? '' : 'locked-menu' }}">
+                    <a href="{{ route("quiz.prepare","evaluasi") }}" class="pc-link d-flex {{ isReady('kuis-3') ? '' : 'locked-menu' }}">
                         @if (isReady('kuis-3'))
                             <span class="pc-micon"><i class="fas fa-rocket"></i></span>
                         @else

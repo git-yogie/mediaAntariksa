@@ -2,14 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Quiz;
 use App\Helpers\Kuis_1;
 use App\Helpers\Kuis_2;
 use App\Helpers\Kuis_3;
 use App\Helpers\Kuis_4;
+use App\Helpers\Evaluasi;
 use App\Helpers\Latihan_1;
 use App\Helpers\Latihan_2;
 use App\Helpers\Latihan_3;
-use App\Models\Quiz;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
@@ -43,6 +44,13 @@ class QuizController extends Controller
                 "type" => "Kuis",
                 "question" => Latihan_3::$question,
             ],
+            "evaluasi" => [
+                "title"=>"Evaluasi",
+                "materi"=>"evaluasi",
+                "type"=>"Evaluasi",
+                "question"=>Evaluasi::$questions,
+                "durasi"=>60
+            ]
         ];
     }
 
@@ -67,6 +75,14 @@ class QuizController extends Controller
     {
 
         $durasiEvaluasi = 20;
+
+        $data = $this->quizInfo[$param];
+        if(isset($data['durasi'])){
+            $durasiEvaluasi = $data["durasi"];
+        }
+
+
+
         $endtime = date("Y-m-d H:i:s", strtotime("+$durasiEvaluasi minutes"));
         if (!session("endtime")) {
             session(["endtime" => $endtime, "startTime" => date("Y-m-d H:i:s")]);
