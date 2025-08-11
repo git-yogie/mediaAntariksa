@@ -9,7 +9,7 @@
                     <form wire:submit.prevent="try">
                         <div class="d-flex justify-content-between align-items-end mb-4">
                             <h3 class="mb-0"><b>Login</b></h3>
-                            <a href="{{ route("auth.register") }}"  class="link-primary">Don't have an account?</a>
+                            <a href="{{ route("auth.register") }}"  class="link-primary">Belum Punya Akun?</a>
                         </div>
                         <div class="form-group mb-3">
                             <label class="form-label">Email Address</label>
@@ -29,7 +29,7 @@
                             <div class="form-check">
                                 <input wire:model='remember' class="form-check-input input-primary" type="checkbox"
                                     id="customCheckc1">
-                                <label class="form-check-label text-muted" for="customCheckc1">Keep me sign in</label>
+                                <label class="form-check-label text-muted" for="customCheckc1">Ingat saya</label>
                             </div>
                         </div>
                         <div class="d-grid mt-4">
