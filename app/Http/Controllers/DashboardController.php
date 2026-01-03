@@ -34,7 +34,6 @@ class DashboardController extends Controller
         'kuis-1','kuis-2','kuis-3','evaluasi'
     ];
 
-
     protected $badge = [
         "pemula" => [
             "point_minimum" => 100,

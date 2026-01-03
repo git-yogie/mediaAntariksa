@@ -22,7 +22,7 @@
             <h4>Hasil Evaluasi</h4>
             <div class="card card-body mb-10">
                 <div class="row">
-                    <div class="col-md-11">
+                    <div class="col-md-10">
                         <div class="position-relative mb-10">
                             <input type="text" wire:model="search"
                                 class="text-counter placeholder-13 form-control py-11 pe-76" maxlength="100"
@@ -37,6 +37,12 @@
                                     <span class="visually-hidden">Loading...</span>
                                 </div>
                             </span>
+                        </button>
+                    </div>
+                    <div class="col-md-1">
+                        <button wire:click="exportExcel" class="btn btn-success w-100 mb-0" title="Export Excel">
+                            <i class="ph ph-file-xls" wire:loading.remove target="exportExcel"></i>
+                            <div wire:loading wire:target="exportExcel" class="spinner-border spinner-border-sm" role="status"></div>
                         </button>
                     </div>
                 </div>

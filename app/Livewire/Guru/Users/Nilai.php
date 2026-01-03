@@ -5,6 +5,9 @@ namespace App\Livewire\Guru\Users;
 use Livewire\Component;
 use App\Models\User;
 use App\Models\KkmSetting; // Pastikan model ini sudah ada
+use App\Exports\NilaiExport; // <--- Import Export Class
+use Maatwebsite\Excel\Facades\Excel;
+
 
 class Nilai extends Component
 {
@@ -45,6 +48,19 @@ class Nilai extends Component
         $this->loadKkm(); 
         // 2. Load data user & hitung statistik ulang
         $this->retrieveData(); 
+    }
+
+    public function exportExcel()
+    {
+        // Pastikan data terbaru sudah ter-load (termasuk filter search kalau ada)
+        $this->retrieveData();
+
+        // Nama file: Nilai_kuis-1_2025-01-01.xlsx
+        $fileName = 'Nilai_' . $this->materi . '_' . date('Y-m-d_H-i') . '.xlsx';
+
+        // Download Excel
+        // Kita kirim $this->users, $this->kkm, dan $this->materi ke Class Export
+        return Excel::download(new NilaiExport($this->users, $this->kkm, $this->materi), $fileName);
     }
 
     // Action untuk Tombol Simpan KKM

@@ -4,12 +4,17 @@ namespace App\Livewire\Guru\Users;
 
 use Livewire\Component;
 use App\Models\User;
+use App\Exports\NilaiExport; // <--- Import Export Class
+use Maatwebsite\Excel\Facades\Excel;
+use App\Models\KkmSetting;
 
 class Evaluasi extends Component
 {
     public $users;
     public $materi;
     public $search = '';
+
+      public $kkm;
 
     // Statistik keseluruhan
     public $jumlah_dikerjakan;
@@ -20,10 +25,17 @@ class Evaluasi extends Component
     public $jumlah_lulus;
     public $jumlah_tidak_lulus;
 
-    public function mount($materi = "kuis-1")
+    public function mount($materi = "evaluasi")
     {
         $this->materi = $materi;
         $this->retrieveData();
+        $this->loadKkm(); // Load KKM awal
+    }
+
+    public function loadKkm()
+    {
+        $setting = KkmSetting::where('materi', $this->materi)->first();
+        $this->kkm = $setting ? $setting->kkm : 70; // Default 70 jika belum diset
     }
 
     public function retrieveData()
@@ -51,6 +63,20 @@ class Evaluasi extends Component
         $this->jumlah_belum_dikerjakan = $this->users->count() - $this->jumlah_dikerjakan;
 
     }
+
+    public function exportExcel()
+    {
+        // Pastikan data terbaru sudah ter-load (termasuk filter search kalau ada)
+        $this->retrieveData();
+
+        // Nama file: Nilai_kuis-1_2025-01-01.xlsx
+        $fileName = 'Nilai_' . $this->materi . '_' . date('Y-m-d_H-i') . '.xlsx';
+
+        // Download Excel
+        // Kita kirim $this->users, $this->kkm, dan $this->materi ke Class Export
+        return Excel::download(new NilaiExport($this->users, $this->kkm, $this->materi), $fileName);
+    }
+
     public function render()
     {
         return view('livewire.guru.users.evaluasi')->layout('layouts.guru-layout');

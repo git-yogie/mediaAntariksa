@@ -56,27 +56,27 @@ class QuizController extends Controller
     }
 
     public function BeforeQuiz($param)
-{
-    $title = $this->quizInfo[$param]["title"];
-    $info = $this->quizInfo[$param];
-    $countQuestion = count($this->quizInfo[$param]["question"]);
+    {
+        $title = $this->quizInfo[$param]["title"];
+        $info = $this->quizInfo[$param];
+        $countQuestion = count($this->quizInfo[$param]["question"]);
 
-    // --- LOGIC BARU: Ambil KKM dari database ---
-    $setting = KkmSetting::where('materi', $param)->first();
-    $kkm = $setting ? $setting->kkm : 70; // Default 70 jika belum diset
-    // ------------------------------------------
+        // --- LOGIC BARU: Ambil KKM dari database ---
+        $setting = KkmSetting::where('materi', $param)->first();
+        $kkm = $setting ? $setting->kkm : 70; // Default 70 jika belum diset
+        // ------------------------------------------
 
-    $data = [
-        "title" => $title,
-        "materi" => $this->quizInfo[$param]["materi"],
-        "info" => $info,
-        "countQuestion" => $countQuestion,
-        "durasi" => 20,
-        "kkm" => $kkm, // <--- Masukkan variable kkm ke sini
-    ];
+        $data = [
+            "title" => $title,
+            "materi" => $this->quizInfo[$param]["materi"],
+            "info" => $info,
+            "countQuestion" => $countQuestion,
+            "durasi" => 20,
+            "kkm" => $kkm, // <--- Masukkan variable kkm ke sini
+        ];
 
-    return view("pages.quiz.quizStart", compact("data","param"));
-}
+        return view("pages.quiz.quizStart", compact("data", "param"));
+    }
 
     public function startQuiz($param)
     {
