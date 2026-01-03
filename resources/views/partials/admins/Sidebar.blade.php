@@ -33,7 +33,7 @@
                     </a>
                 </li>
                 <li class="pc-item">
-                    <a href="#" class="pc-link d-flex" disabled>
+                    <a href="{{ route('guru.evaluasi') }}" class="pc-link d-flex" disabled>
                         <span class="pc-micon"><i class="far fa-file-alt"></i></span>
                         <span class="pc-mtext">Nilai Evaluasi</span>
                     </a>

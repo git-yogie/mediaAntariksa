@@ -1,243 +1,222 @@
 <div class="pc-container">
     <div class="pc-content">
-        <!-- [ breadcrumb ] start -->
         <div class="page-header">
             <div class="page-block">
-                <div class="row  align-items-center">
+                <div class="row align-items-center">
                     <div class="col-md-12">
                         <div class="page-header-title">
                             <h5 class="m-b-10">Guru</h5>
                         </div>
                         <ul class="breadcrumb">
-                            <li class="breadcrumb-item" aria-current="page"><a href="{{ route('guru.user') }}">Siswa</a>
-                            </li>
-                            <li class="breadcrumb-item" aria-current="page">
-                                Hasil Kuis</li>
-                            </li>
+                            <li class="breadcrumb-item"><a href="{{ route('guru.user') }}">Siswa</a></li>
+                            <li class="breadcrumb-item">Hasil Kuis</li>
                         </ul>
                     </div>
                 </div>
             </div>
         </div>
+
         <div class="container">
             <h4>Hasil Kuis</h4>
-            <div class="card card-body mb-10">
-                <div class="row">
+
+            <div class="card card-body mb-3">
+                <div class="row align-items-center">
                     <div class="col-md-7">
-                        <div class="position-relative mb-10">
-                            <input type="text" wire:model="search"
-                                class="text-counter placeholder-13 form-control py-11 pe-76" maxlength="100"
-                                id="courseTitle" placeholder="Cari Nama Siswa....">
+                        <div class="position-relative">
+                            <input type="text" wire:model.live="search"
+                                class="form-control py-2" 
+                                placeholder="Cari Nama Siswa....">
                         </div>
                     </div>
                     <div class="col-md-4">
-                        <div class="search-input mb-10">
-                            <select wire:model="materi" class="form-control form-select h6 rounded-4 mb-0 py-10 px-8">
-                                <option value="kuis-1" selected>Kuis Menjelajahi Bumi, Matahari, dan Bulan</option>
-                                <option value="kuis-2">Kuis Dampak Revolusi dan Rotasi Bumi</option>
-                                <option value="kuis-3">Kuis Menjelajahi Tata Surya</option>
-                                <option value="evaluasi">Evaluasi</option>
-                            </select>
-                        </div>
+                        <select wire:model.live="materi" class="form-control form-select py-2">
+                            <option value="kuis-1">Kuis Menjelajahi Bumi, Matahari, dan Bulan</option>
+                            <option value="kuis-2">Kuis Dampak Revolusi dan Rotasi Bumi</option>
+                            <option value="kuis-3">Kuis Menjelajahi Tata Surya</option>
+                            <option value="evaluasi">Evaluasi</option>
+                        </select>
                     </div>
                     <div class="col-md-1">
-                        <button wire:click="retrieveData" class="btn btn-primary mb-0">
-                            <i class="ph ph-magnifying-glass" wire:loading.remove></i>
-                            <span wire:loading wire:target="retrieveData">
-                                <div class="spinner-border spinner-border-sm" role="status">
-                                    <span class="visually-hidden">Loading...</span>
-                                </div>
-                            </span>
+                        <button wire:click="retrieveData" class="btn btn-primary w-100 mb-0">
+                            <i class="ph ph-magnifying-glass" wire:loading.remove target="retrieveData"></i>
+                            <div wire:loading wire:target="retrieveData" class="spinner-border spinner-border-sm" role="status"></div>
                         </button>
                     </div>
                 </div>
-
             </div>
-            <div class="accordion" id="accordionExample">
+
+            <div class="card mb-3 border-left-primary shadow-sm" style="border-left: 5px solid #4680ff;">
+                <div class="card-body py-3">
+                    <div class="row align-items-center">
+                        <div class="col-md-8">
+                            <h5 class="mb-1">Pengaturan Kelulusan</h5>
+                            <small class="text-muted">
+                                Atur KKM untuk <strong>{{ strtoupper(str_replace('-', ' ', $materi)) }}</strong>. 
+                                Nilai di bawah KKM akan dianggap tidak lulus.
+                            </small>
+                            
+                            @if (session()->has('message'))
+                                <div class="text-success small mt-1">
+                                    <i class="ph ph-check-circle"></i> {{ session('message') }}
+                                </div>
+                            @endif
+                        </div>
+                        <div class="col-md-4">
+                            <div class="input-group">
+                                <span class="input-group-text bg-light fw-bold">KKM</span>
+                                <input type="number" wire:model="kkm" 
+                                       class="form-control fw-bold text-center" 
+                                       placeholder="70">
+                                <button wire:click="saveKkm" class="btn btn-dark" type="button">
+                                    <span wire:loading.remove wire:target="saveKkm">Simpan</span>
+                                    <span wire:loading wire:target="saveKkm">
+                                        <span class="spinner-border spinner-border-sm"></span>
+                                    </span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion mb-3" id="accordionExample">
                 <div class="accordion-item">
                     <h2 class="accordion-header">
                         <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                            Statistik Hasil Kuis
+                            data-bs-target="#collapseOne">
+                            Statistik Hasil Kuis (Batas Lulus: {{ $kkm }})
                         </button>
                     </h2>
-                    <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                    <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
                         <div class="accordion-body">
                             <div class="row">
                                 <div class="col-md-6 col-xl-3">
                                     <div class="card">
                                         <div class="card-body">
-                                            <h6 class="mb-2 f-w-400 text-muted">Jumlah Siswa Mengerjakan</h6>
+                                            <h6 class="mb-2 f-w-400 text-muted">Peserta</h6>
                                             <h4 class="mb-0">{{ $jumlah_dikerjakan }} / {{ count($users) }}
-
-                                                <span class="badge bg-light-info border border-info">
-                                                    {{ $jumlah_dikerjakan > 0 ? round(($jumlah_dikerjakan / count($users)) * 100, 2) : 0 }}%
+                                                <span class="badge bg-light-info border border-info text-xs">
+                                                    {{ $jumlah_dikerjakan > 0 ? round(($jumlah_dikerjakan / count($users)) * 100) : 0 }}%
                                                 </span>
                                             </h4>
-
                                         </div>
-                                        <div id="statistik-graph-1"></div>
                                     </div>
                                 </div>
                                 <div class="col-md-6 col-xl-3">
                                     <div class="card">
                                         <div class="card-body">
-                                            <h6 class="mb-2 f-w-400 text-muted">Rata-rata Nilai</h6>
-                                            <h4 class="mb-0">{{ $jumlah_dikerjakan > 0 ? round($rata_rata, 2) : 0 }}
-                                            </h4>
+                                            <h6 class="mb-2 f-w-400 text-muted">Rata-rata</h6>
+                                            <h4 class="mb-0">{{ $jumlah_dikerjakan > 0 ? round($rata_rata, 2) : 0 }}</h4>
                                         </div>
-                                        <div id="statistik-graph-2"></div>
                                     </div>
                                 </div>
                                 <div class="col-md-6 col-xl-3">
                                     <div class="card">
                                         <div class="card-body">
-                                            <h6 class="mb-2 f-w-400 text-muted">Nilai Tertinggi</h6>
-                                            <h4 class="mb-0">{{ $jumlah_dikerjakan > 0 ? $nilai_tertinggi : '-' }}
-                                            </h4>
+                                            <h6 class="mb-2 f-w-400 text-muted">Tertinggi</h6>
+                                            <h4 class="mb-0">{{ $jumlah_dikerjakan > 0 ? $nilai_tertinggi : '-' }}</h4>
                                         </div>
-                                        <div id="statistik-graph-3"></div>
                                     </div>
                                 </div>
                                 <div class="col-md-6 col-xl-3">
                                     <div class="card">
                                         <div class="card-body">
-                                            <h6 class="mb-2 f-w-400 text-muted">Nilai Terendah</h6>
+                                            <h6 class="mb-2 f-w-400 text-muted">Terendah</h6>
                                             <h4 class="mb-0">{{ $jumlah_dikerjakan > 0 ? $nilai_terendah : '-' }}</h4>
                                         </div>
-                                        <div id="statistik-graph-4"></div>
                                     </div>
                                 </div>
                                 <div class="col-md-6 col-xl-6">
                                     <div class="card">
                                         <div class="card-body">
-                                            <h6 class="mb-2 f-w-400 text-muted">Jumlah Lulus</h6>
-                                            <h4 class="mb-0">
-                                                {{ $jumlah_lulus }} / {{ count($users) }}
-                                                <span class="badge bg-light-success border border-success">
+                                            <h6 class="mb-2 f-w-400 text-muted">Lulus (>= {{ $kkm }})</h6>
+                                            <h4 class="mb-0 text-success">
+                                                {{ $jumlah_lulus }}
+                                                <span class="badge bg-light-success border border-success text-xs">
                                                     {{ $jumlah_dikerjakan > 0 ? round(($jumlah_lulus / $jumlah_dikerjakan) * 100, 2) : 0 }}%
                                                 </span>
                                             </h4>
                                         </div>
-                                        <div id="statistik-graph-5"></div>
                                     </div>
                                 </div>
                                 <div class="col-md-6 col-xl-6">
                                     <div class="card">
                                         <div class="card-body">
-                                            <h6 class="mb-2 f-w-400 text-muted">Jumlah Tidak Lulus</h6>
-                                            <h4 class="mb-0">
+                                            <h6 class="mb-2 f-w-400 text-muted">Tidak Lulus (< {{ $kkm }})</h6>
+                                            <h4 class="mb-0 text-danger">
                                                 {{ $jumlah_tidak_lulus }}
-                                                <span class="badge bg-light-danger border border-danger">
+                                                <span class="badge bg-light-danger border border-danger text-xs">
                                                     {{ $jumlah_dikerjakan > 0 ? round(($jumlah_tidak_lulus / $jumlah_dikerjakan) * 100, 2) : 0 }}%
                                                 </span>
                                             </h4>
                                         </div>
-                                        <div id="statistik-graph-6"></div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="card card-body">
+            </div>
 
-                    <div class="table-responsive">
-                        <table id="assignmentTable" class="table table-striped">
-                            <thead>
+            <div class="card card-body">
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Nama</th>
+                                <th>Nilai</th>
+                                <th>Status</th>
+                                <th>Waktu Mulai</th>
+                                <th>Waktu Berakhir</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($users as $user)
                                 <tr>
-                                    <th class="fixed-width">
-                                        #
-                                    </th>
-                                    <th class="h6 text-gray-300">Nama</th>
-                                    <th class="h6 text-gray-300">Nilai</th>
-                                    <th class="h6 text-gray-300">Status</th>
-                                    <th class="h6 text-gray-300">Waktu Mulai</th>
-                                    <th class="h6 text-gray-300">Waktu Berakhir</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($users as $user)
-                                    <tr>
-                                        <td class="fixed-width">
-                                            {{-- number --}}
-                                            {{ $loop->iteration }}
-                                        </td>
-                                        <td>
-                                            <div class="flex-align gap-8">
-                                                <span
-                                                    class="h6 mb-0 fw-medium text-gray-300">{{ $user->name }}</span>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="flex-align gap-8">
-                                                @if (count($user->quizzes) > 0)
-                                                    <span
-                                                        class="h6 mb-0 fw-medium text-gray-300">{{ $user->quizzes[0]->nilai }}</span>
-                                                @else
-                                                    <span class="h6 mb-0 fw-medium text-danger text-gray-300">Belum
-                                                        dikerjakan</span>
-                                                @endif
-                                            </div>
-                                        </td>
-                                        <td>
-                                            @if (count($user->quizzes) > 0)
-                                                @if ($user->quizzes[0]->nilai > 70)
-                                                    <span
-                                                        class="badge bg-light-success border border-success text-success-600">
-                                                        <span
-                                                            class="w-6 h-6 bg-success-600 rounded-circle flex-shrink-0"></span>
-                                                        Lulus
-                                                    </span>
-                                                @else
-                                                    <span
-                                                        class="badge bg-light-danger border border-danger text-danger-600">
-                                                        <span
-                                                            class="w-6 h-6 bg-danger-600 rounded-circle flex-shrink-0"></span>
-                                                        Tidak lulus
-                                                    </span>
-                                                @endif
+                                    <td>{{ $loop->iteration }}</td>
+                                    <td>
+                                        <span class="h6 mb-0 fw-medium text-gray-300">{{ $user->name }}</span>
+                                    </td>
+                                    <td>
+                                        @if (count($user->quizzes) > 0)
+                                            <span class="h6 mb-0 fw-medium text-gray-300">{{ $user->quizzes[0]->nilai }}</span>
+                                        @else
+                                            <span class="text-danger small">Belum dikerjakan</span>
+                                        @endif
+                                    </td>
+                                    <td>
+                                        @if (count($user->quizzes) > 0)
+                                            {{-- BANDINGKAN DENGAN VARIABLE KKM --}}
+                                            @if ($user->quizzes[0]->nilai >= $kkm)
+                                                <span class="badge bg-light-success border border-success text-success-600">
+                                                    <span class="w-6 h-6 bg-success-600 rounded-circle flex-shrink-0"></span>
+                                                    Lulus
+                                                </span>
                                             @else
-                                                <span
-                                                    class="text-13 py-2 px-8 bg-danger-50 text-danger-600 d-inline-flex align-items-center gap-8 rounded-pill">
-                                                    <span
-                                                        class="w-6 h-6 bg-danger-600 rounded-circle flex-shrink-0"></span>
-                                                    -
+                                                <span class="badge bg-light-danger border border-danger text-danger-600">
+                                                    <span class="w-6 h-6 bg-danger-600 rounded-circle flex-shrink-0"></span>
+                                                    Tidak lulus
                                                 </span>
                                             @endif
-                                        </td>
-                                        @if (count($user->quizzes) > 0)
-                                            <td>
-
-                                                <span
-                                                    class="h6 mb-0 fw-medium text-gray-300">{{ $user->quizzes[0]->waktu_mulai }}</span>
-                                            </td>
-                                            <td>
-                                                <span
-                                                    class="h6 mb-0 fw-medium text-gray-300">{{ $user->quizzes[0]->waktu_selesai }}</span>
-                                            </td>
                                         @else
-                                            <td>
-                                                <span class="h6 mb-0 fw-medium text-gray-300">-</span>
-                                            </td>
-                                            <td>
-                                                <span class="h6 mb-0 fw-medium text-gray-300">-</span>
-                                            </td>
+                                            <span class="badge bg-light-secondary text-secondary">-</span>
                                         @endif
-
-                                    </tr>
-                                @endforeach
-
-                            </tbody>
-                        </table>
-                    </div>
-
-
-
+                                    </td>
+                                    @if (count($user->quizzes) > 0)
+                                        <td>{{ $user->quizzes[0]->waktu_mulai }}</td>
+                                        <td>{{ $user->quizzes[0]->waktu_selesai }}</td>
+                                    @else
+                                        <td>-</td>
+                                        <td>-</td>
+                                    @endif
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
                 </div>
             </div>
 
         </div>
-
     </div>
 </div>

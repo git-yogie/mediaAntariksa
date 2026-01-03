@@ -131,6 +131,8 @@
                 const quiz = @json($soalQuiz);
                 const stopTest = document.getElementById('stop_test');
 
+                const kkm = parseInt("{{ $kkm }}");
+
                 const quizModal = new bootstrap.Modal(document.getElementById('hasil-quiz'));
 
                 const total = quiz.length;
@@ -288,7 +290,7 @@
 
         </div>
             `
-                    if (nilai >= 75) {
+                    if (nilai >= kkm) {
                         document.getElementById("hasil-quiz-nilai").classList.add("text-success")
                         document.getElementById("hasil-quiz-nilai").classList.remove("text-danger")
                         document.getElementById("modal-hasil").innerHTML += `

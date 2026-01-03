@@ -63,7 +63,11 @@ Route::middleware(['auth', 'guru'])->group(function () {
     Route::get("/guru/users/form", \App\Livewire\Guru\Users\Form::class)->name("guru.user.form");
     Route::get("/guru/users/form/{id}", \App\Livewire\Guru\Users\Form::class)->name("guru.user.edit");
     Route::get("/guru/nilai", \App\Livewire\Guru\Users\Nilai::class)->name("guru.nilai");
+    Route::get("/guru/evaluasi", \App\Livewire\Guru\Users\Evaluasi::class)->name("guru.evaluasi");
     Route::get("/guru/siswa", \App\Livewire\Guru\Siswa::class)->name("guru.siswa");
 });
+
+
+
 
 

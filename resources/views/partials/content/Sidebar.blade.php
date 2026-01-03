@@ -1,19 +1,36 @@
 @php
-    function isReady($requirement)
-    {
-        if ($requirement == '' || Auth::user()->role == 'guru') {
-            return true; // If no requirement, consider it ready
-        }
-        $user_id = auth()->user()->id;
-        $kuis = \App\Models\Quiz::where('materi', $requirement)->where('user_id', $user_id)->first();
-        if ($kuis) {
-            $quizResult = $kuis->nilai;
-            return $quizResult > 70;
-        } else {
-            return false; // If no requirement, consider it ready
+    use App\Models\KkmSetting;
+    use App\Models\Quiz;
+    use Illuminate\Support\Facades\Auth;
+
+    // Pastikan function ini tidak redeclare jika di-include berkali-kali
+    if (!function_exists('isReady')) {
+        function isReady($requirement)
+        {
+            // Guru bebas akses
+            if ($requirement == '' || Auth::user()->role == 'guru') {
+                return true; 
+            }
+
+            $user_id = auth()->user()->id;
+            
+            // 1. Ambil Nilai Kuis Siswa
+            $kuis = Quiz::where('materi', $requirement)
+                        ->where('user_id', $user_id)
+                        ->first();
+
+            if ($kuis) {
+                // 2. Ambil KKM Dinamis dari Database sesuai materi
+                $setting = KkmSetting::where('materi', $requirement)->first();
+                $batas_lulus = $setting ? $setting->kkm : 70; // Default 70 kalau belum diset guru
+
+                // 3. Cek apakah Nilai >= KKM
+                return $kuis->nilai >= $batas_lulus;
+            } else {
+                return false; // Belum mengerjakan, berarti belum siap
+            }
         }
     }
-
 @endphp
 
 <nav class="pc-sidebar">
@@ -166,10 +183,11 @@
                         imageWidth: 80,
                         imageAlt: 'Akses Terkunci',
                         title: 'Akses Terkunci!',
-                        text: 'Selesaikan kuis materi sebelumnya dengan nilai lebih dari 70 dulu ya biar bisa lanjut!',
-                        confirmButtonText: 'Oke!',
+                        // Ubah pesan teks di bawah ini:
+                        text: 'Selesaikan kuis materi sebelumnya dengan nilai mencapai KKM agar bisa lanjut!',
+                        confirmButtonText: 'Siap!',
+                        confirmButtonColor: '#d33'
                     });
-
                 });
             });
         });

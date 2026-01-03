@@ -27,6 +27,9 @@ class LoginForm extends Component
         if (auth()->attempt(['email' => $this->email, 'password' => $this->password], $this->remember)) {
             $this->dispatch('toast', ['type' => 'success', 'message' => 'Login Berhasil!']);
             sleep(1);
+             if(auth()->user()->role === 'guru'){
+                return redirect()->route('guru.dashboard');
+            }
             return redirect()->route('welcome.index');
         } else {
             $this->dispatch('toast', ['type' => 'error', 'message' => 'Tidak ada data yang cocok!']);

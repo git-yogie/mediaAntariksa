@@ -59,16 +59,35 @@ class DashboardController extends Controller
     ];
     public function index()
     {
-        foreach ($this->list_materi as $key => $value) {
-            $this->list_materi[$key]["count"] = LearningProgress::where("user_id", auth()->user()->id)->where('materi', $key)->count();
-            $this->list_materi[$key]['count'] += Quiz::where('user_id',Auth::user()->id)->where('materi',$this->list_materi[$key]['kuis'])->count();
-            $this->list_materi[$key]["percentage"] = floor(($this->list_materi[$key]['count']/$value['total']) *100);
-            if ($this->list_materi[$key]["count"] == $value["total"]) {
+       foreach ($this->list_materi as $key => $value) {
+            // 1. Hitung Progress Materi Bacaan
+            $this->list_materi[$key]["count"] = LearningProgress::where("user_id", auth()->user()->id)
+                ->where('materi', $key)
+                ->count();
+            
+            // 2. Cek Apakah Kuis Sudah Dikerjakan (Ambil Datanya)
+            $quizData = Quiz::where('user_id', Auth::user()->id)
+                ->where('materi', $this->list_materi[$key]['kuis'])
+                ->first();
+
+            // Jika kuis ada, hitung sebagai progress dan simpan nilainya
+            if ($quizData) {
+                $this->list_materi[$key]['count'] += 1; // Tambah 1 progress point dari kuis
+                $this->list_materi[$key]['quiz_done'] = true; // Flag penanda kuis selesai
+                $this->list_materi[$key]['model_kuis'] = $quizData->nilai; // Simpan nilai asli
+            } else {
+                $this->list_materi[$key]['quiz_done'] = false;
+                $this->list_materi[$key]['model_kuis'] = 0;
+            }
+
+            // 3. Hitung Persentase Total
+            $this->list_materi[$key]["percentage"] = floor(($this->list_materi[$key]['count'] / $value['total']) * 100);
+
+            // 4. Status (Opsional, buat styling)
+            if ($this->list_materi[$key]["percentage"] >= 100) {
                 $this->list_materi[$key]["status"] = "done";
-                $this->list_materi[$key]['model_kuis'] = Quiz::where('user_id',Auth::user()->id)->where('materi',$this->list_materi[$key]['kuis'])->first()->nilai;
             } else {
                 $this->list_materi[$key]["status"] = "progress";
-                $this->list_materi[$key]['model_kuis'] = 0;
             }
         }
         $topUsers = User::with('learningProgress')->where("role", "siswa")->get()->sortByDesc(function ($user) {
