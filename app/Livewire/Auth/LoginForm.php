@@ -30,7 +30,7 @@ class LoginForm extends Component
              if(auth()->user()->role === 'guru'){
                 return redirect()->route('guru.dashboard');
             }
-            return redirect()->route('welcome.index');
+            return redirect()->route('dashboard');
         } else {
             $this->dispatch('toast', ['type' => 'error', 'message' => 'Tidak ada data yang cocok!']);
         }

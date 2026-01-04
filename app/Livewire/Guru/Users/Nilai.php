@@ -41,6 +41,8 @@ class Nilai extends Component
         $this->kkm = $setting ? $setting->kkm : 70; // Default 70 jika belum diset
     }
 
+    
+
     // Listener jika dropdown materi berubah
     public function updatedMateri()
     {

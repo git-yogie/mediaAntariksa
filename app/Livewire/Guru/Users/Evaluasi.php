@@ -38,6 +38,8 @@ class Evaluasi extends Component
         $this->kkm = $setting ? $setting->kkm : 70; // Default 70 jika belum diset
     }
 
+    
+
     public function retrieveData()
     {
         // Ambil user dengan quiz yang sesuai materi
