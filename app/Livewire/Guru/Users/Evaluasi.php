@@ -44,7 +44,7 @@ class Evaluasi extends Component
     {
         // Ambil user dengan quiz yang sesuai materi
         $query = User::with(['quizzes' => function ($q) {
-            $q->where('materi', $this->materi)->first();
+            $q->where('materi', $this->materi);
         }])->where('role', 'siswa');
 
         if (!empty($this->search)) {
