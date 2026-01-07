@@ -13,25 +13,28 @@ class DashboardController extends Controller
     protected $list_materi = [
 
         "menjelajah-matahari-bumi-dan-bulan" => [
-            "title"=>"Menjelajahi Matahari, Bumi dan Bulan",
+            "title" => "Menjelajahi Matahari, Bumi dan Bulan",
             "total" => 6,
-            "kuis"=> 'kuis-1'
+            "kuis" => 'kuis-1'
         ],
         "dampak-gerak-rotasi-dan-revolusi-bumi" => [
-            "title"=> "Dampak Gerak Rotasi dan Revolusi bumi",
+            "title" => "Dampak Gerak Rotasi dan Revolusi bumi",
             "total" => 5,
-            "kuis"=> 'kuis-2'
+            "kuis" => 'kuis-2'
         ],
 
         "menjelajahi-sistem-tata-surya" => [
-            "title"=>"Menjelajahi Sistem Tata Surya",
+            "title" => "Menjelajahi Sistem Tata Surya",
             "total" => 3,
-            "kuis"=> 'kuis-3'
+            "kuis" => 'kuis-3'
         ],
     ];
 
     protected $kuis = [
-        'kuis-1','kuis-2','kuis-3','evaluasi'
+        'kuis-1',
+        'kuis-2',
+        'kuis-3',
+        'evaluasi'
     ];
 
     protected $badge = [
@@ -58,12 +61,12 @@ class DashboardController extends Controller
     ];
     public function index()
     {
-       foreach ($this->list_materi as $key => $value) {
+        foreach ($this->list_materi as $key => $value) {
             // 1. Hitung Progress Materi Bacaan
             $this->list_materi[$key]["count"] = LearningProgress::where("user_id", auth()->user()->id)
                 ->where('materi', $key)
                 ->count();
-            
+
             // 2. Cek Apakah Kuis Sudah Dikerjakan (Ambil Datanya)
             $quizData = Quiz::where('user_id', Auth::user()->id)
                 ->where('materi', $this->list_materi[$key]['kuis'])
@@ -97,7 +100,7 @@ class DashboardController extends Controller
             ->where('id', auth()->user()->id)
             ->first();
 
-        $rank = User::with(['learningProgress','evaluasi'])->where('role','siswa')
+        $rank = User::with(['learningProgress', 'evaluasi'])->where('role', 'siswa')
             ->get()
             ->sortByDesc(function ($user) {
                 return $user->learningProgress->sum('point');
@@ -108,12 +111,21 @@ class DashboardController extends Controller
         $total = 0;
         $progress = 0;
 
+        $evaluasi = Quiz::where('user_id', Auth::user()->id)
+            ->where('materi', "evaluasi")
+            ->first();
+
+        if ($evaluasi) {
+            $progress += 1; // Tambah 1 progress point dari kuis   
+        }
+
+
         foreach ($this->list_materi as $key => $value) {
             $progress += $value["count"];
             $total += $value["total"];
         }
-        $total+= 1;
-        
+        $total += 1;
+
         $list_materi = $this->list_materi;
         $percentage = floor(($progress / $total) * 100);
 
