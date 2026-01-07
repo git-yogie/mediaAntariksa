@@ -99,7 +99,7 @@
                             </li>
                             <li class="nav-item">
                                 <a class="btn btn-primary" target="_blank"
-                                    href="https://codedthemes.com/item/mantis-bootstrap-admin-dashboard/">Daftar</a>
+                                    href="{{ route('auth.register') }}">Daftar</a>
                             </li>
                         @endif
                     </ul>

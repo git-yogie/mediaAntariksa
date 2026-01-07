@@ -87,7 +87,7 @@ class Nilai extends Component
     public function retrieveData()
     {
         $query = User::with(['quizzes' => function ($q) {
-            $q->where('materi', $this->materi)->first();
+            $q->where('materi', $this->materi);
         }])->where('role', 'siswa');
 
         if (!empty($this->search)) {
@@ -98,7 +98,6 @@ class Nilai extends Component
 
         // Gabungkan semua quiz
         $allQuizzes = $this->users->flatMap(fn($user) => $user->quizzes);
-
         $this->jumlah_dikerjakan = $allQuizzes->count();
         $this->rata_rata = $allQuizzes->avg('nilai');
         $this->nilai_tertinggi = $allQuizzes->max('nilai');
